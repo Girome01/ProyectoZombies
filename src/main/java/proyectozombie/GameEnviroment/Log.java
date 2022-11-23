@@ -3,9 +3,13 @@ package proyectozombie.GameEnviroment;
 public class Log {
     private String log;
 
-    public void writeLog(String logContent){}
+    public void writeLog(String logContent){
+        log += "---------------------------------";
+        log += logContent;
+    }
+    
     public String readLog(){
-        return null;
+        return log;
     }
 
 }

@@ -1,25 +1,92 @@
 package proyectozombie.Logica;
 
+import java.awt.Image;
 import javax.swing.*;
 import java.util.ArrayList;
+import proyectozombie.CharacterCreation.CharacterGame;
 
 public class Game {
-
-    private ArrayList<WeaponThread> defense;
+    private campoBatalla_Juego refPantalla;
+    private ArrayList<WeaponThread> defense; 
     private ArrayList<ZombieThread> enemies;
+    protected ArrayList<CharacterGame> listDefense;
+    protected ArrayList<CharacterGame> listEnemies;
 
-    public void generateEnemies(){}
-    public void generateDefense(){}
-    public void levelUp(){}
-    public void startArmy(){}
-    public void startEnemies(){}
-    public void pauseArmy(){}
-    public void stopArmy(){}
-
-    public Boolean isAvailable(int a, int b){
-        return null;
+    public Game(campoBatalla_Juego refPantalla, ArrayList<CharacterGame> personajes) {
+       this.refPantalla = refPantalla;
+       this.listDefense = personajes;
+       this.defense = new ArrayList();
+       this.enemies = new ArrayList();
     }
-    public GameThread getWinner(int a, int b){
+    
+    
+    public void generateEnemies(){}
+    public void generateDefense(){
+        for (int i = 0; i < listDefense.size(); i++) {
+            String nombreArchivo = listDefense.get(i).getcAppearance(listDefense.get(i).getcLevel(),"STOP");
+            JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, );
+            this.defense.add(new GameThread(refPantalla, labelForThread, (i+1), listDefense.get(i)));
+        }
+    }
+    public void levelUp(){}
+    public void startArmy(){
+        for (int i = 0; i < this.defense.size(); i++) {
+            this.defense.get(i).start();
+        }
+    }
+    public void startEnemies(){
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).start();
+        }
+    }
+    public void pauseGame(){
+        for (int i = 0; i < this.defense.size(); i++) {
+            this.defense.get(i).setPaused();
+        }
+         for (int i = 0; i < this.enemies.size(); i++) {
+            this.enemies.get(i).setPaused();
+        }
+    }
+    public void stopGame(){
+        for (int i = 0; i < this.defense.size(); i++) {
+            this.defense.get(i).stopThread();
+        }
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).stopThread();
+        }
+    }
+
+    public Boolean isAvailable(int x, int y){
+        for (int i = 0; i < this.defense.size(); i++){
+            if (x == this.defense.get(i).refLabel.getLocation().x && y == this.defense.get(i).refLabel.getLocation().y)
+                return false;
+        }
+        for (int i = 0; i < enemies.size(); i++){
+            if (x == enemies.get(i).refLabel.getLocation().x && y == enemies.get(i).refLabel.getLocation().y)
+                return false;
+        }
+        return true;
+    }
+    public GameThread getWinner(GameThread guerrero){
+        String ganador="";
+        boolean esArmy = this.defense.contains(guerrero);
+        if (esArmy){
+            for (int i = 0; i < this.defense.size(); i++) {
+                if (this.defense.get(i).weapon.getcLife() > 0)
+                    return null;
+            }
+            ganador="Enemigos";
+            stopGame();
+            
+            }else {
+            for (int i = 0; i < enemies.size(); i++) {
+                if(enemies.get(i).zombie.getcLife() > 0 )
+                    return null;
+            }
+           ganador="Aliados";
+           stopGame();
+        }
+        refPantalla.mostrarGanador(ganador);
         return null;
     }
     public Boolean inRangeDefense(GameThread gameThread,int a, int b){
@@ -28,6 +95,14 @@ public class Game {
     public GameThread getEnemy(GameThread gameThread){
         return null;
     }
-    public void changeImage(String img, JLabel imgLabel){}
+    public void changeImage(String url, JLabel refLabel){
+        ImageIcon imageicon = new ImageIcon(url);
+        int ancho=imageicon.getIconWidth();
+        int alto=imageicon.getIconHeight();
+        Image img = imageicon.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+        refLabel.setIcon(new ImageIcon(img));
+        refLabel.setSize(ancho, alto);
+        refLabel.setOpaque(false);
+    }
 
 }

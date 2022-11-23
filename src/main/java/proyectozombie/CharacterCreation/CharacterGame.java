@@ -63,15 +63,19 @@ public class CharacterGame implements iPrototype {
         
     }
     
-    public int cAttack(CharacterGame enemyCharacter){
+    public int cAttack(ArrayList<CharacterGame> enemyCharacter){
         //Este método se usa sólo si el character está en el range del atacante.
         for(int i=0; i< this.cShowGearList().size(); i++){
             if(this.cShowGearList().get(i).isgActive()){
-                enemyCharacter.cDamage(this.cShowGearList().get(i).getgDamage());
+                for(CharacterGame enemy: enemyCharacter){
+                    enemy.cDamage(this.cShowGearList().get(i).getgDamage());
+                }
                 return this.cShowGearList().get(i).getgDamage();
             }
         }
-        enemyCharacter.cDamage(this.cHitPS);
+        for(CharacterGame enemy: enemyCharacter){
+            enemy.cDamage(this.cHitPS);
+        }
         return this.cHitPS;
         
     }  
