@@ -89,11 +89,7 @@ public class Game {
         refPantalla.mostrarGanador(ganador);
         return null;
     }
-    public Boolean inRangeDefense(GameThread gameThread,int a, int b){
 
-        //TODO: hacer algo aqui
-        return null;
-    }
     public GameThread getEnemy(GameThread gameThread){
         return null;
     }

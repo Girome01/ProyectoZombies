@@ -1,11 +1,16 @@
 package proyectozombie.CharacterCreation;
 
+import proyectozombie.Logica.GameThread;
+import proyectozombie.Logica.ZombieThread;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.lang.Math.abs;
+
 
 public class CharacterGame implements iPrototype {
-    protected String cName; 
+    protected String cName;
     protected HashMap<Integer, Appearance> cAppearance;
     protected int cSpawnLevel;
     protected int cHitPS;
@@ -16,71 +21,101 @@ public class CharacterGame implements iPrototype {
     protected int cLevel;
     protected HashMap<String, Gear> cGear = new HashMap<>();
 
-     public CharacterGame(CharacterBuilder<?> builder) {
-            this.cName = builder.cName;
-            this.cAppearance = builder.cAppearance;
-            this.cSpawnLevel = builder.cSpawnLevel;
-            this.cHitPS = builder.cHitPS;
-            this.cLife = builder.cLife;
-            this.cStorageSpace = builder.cStorageSpace;
-            this.cCost = builder.cCost;
-            this.cLevel = builder.cLevel;
-        }
-    
-    public CharacterGame(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife,
-                int cStorageSpace, double cCost, int cLevel) {
-            this.cName = cName;
-            this.cAppearance = cAppearance;
-            this.cSpawnLevel = cSpawnLevel;
-            this.cHitPS = cHitPS;
-            this.cLife = cLife;
-            this.cStorageSpace = cStorageSpace;
-            this.cCost = cCost;
-            this.cLevel = cLevel;
-        }
-
-    public void cLevelUp(){
-        this.cLevel+=1;
+    public CharacterGame(CharacterBuilder<?> builder) {
+        this.cName = builder.cName;
+        this.cAppearance = builder.cAppearance;
+        this.cSpawnLevel = builder.cSpawnLevel;
+        this.cHitPS = builder.cHitPS;
+        this.cLife = builder.cLife;
+        this.cStorageSpace = builder.cStorageSpace;
+        this.cCost = builder.cCost;
+        this.cLevel = builder.cLevel;
     }
-    
-    public void cAddGear(String name, Gear newGear){
+
+    public CharacterGame(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife,
+                         int cStorageSpace, double cCost, int cLevel) {
+        this.cName = cName;
+        this.cAppearance = cAppearance;
+        this.cSpawnLevel = cSpawnLevel;
+        this.cHitPS = cHitPS;
+        this.cLife = cLife;
+        this.cStorageSpace = cStorageSpace;
+        this.cCost = cCost;
+        this.cLevel = cLevel;
+    }
+
+    public void cLevelUp() {
+        this.cLevel += 1;
+    }
+
+    public void cAddGear(String name, Gear newGear) {
         this.cGear.put(name.toUpperCase().strip(), newGear);
     }
 
-    public void cActiveDisableGear(String gearName, boolean state){
-        this.cGear.get(gearName.toUpperCase().strip()).setgActive(state);  
+    public void cActiveDisableGear(String gearName, boolean state) {
+        this.cGear.get(gearName.toUpperCase().strip()).setgActive(state);
     }
-    
-    public void cDamage(int damage){
-        if(this.cLife>0){
-            if(this.cLife>=damage){
-                this.setcLife(this.cLife-damage);      
-            }
-            else if(this.cLife-damage<=0){
-                this.cLife=0;
+
+    public void cDamage(int damage) {
+        if (this.cLife > 0) {
+            if (this.cLife >= damage) {
+                this.setcLife(this.cLife - damage);
+            } else if (this.cLife - damage <= 0) {
+                this.cLife = 0;
             }
         }
-        
+
     }
-    
-    public int cAttack(ArrayList<CharacterGame> enemyCharacter){
+
+    public int cAttack(ArrayList<CharacterGame> enemyCharacter) {
         //Este método se usa sólo si el character está en el range del atacante.
-        for(int i=0; i< this.cShowGearList().size(); i++){
-            if(this.cShowGearList().get(i).isgActive()){
-                for(CharacterGame enemy: enemyCharacter){
+        for (int i = 0; i < this.cShowGearList().size(); i++) {
+            if (this.cShowGearList().get(i).isgActive()) {
+                for (CharacterGame enemy : enemyCharacter) {
                     enemy.cDamage(this.cShowGearList().get(i).getgDamage());
                 }
                 return this.cShowGearList().get(i).getgDamage();
             }
         }
-        for(CharacterGame enemy: enemyCharacter){
+        for (CharacterGame enemy : enemyCharacter) {
             enemy.cDamage(this.cHitPS);
         }
         return this.cHitPS;
-        
-    }  
-    
-    public ArrayList<Gear> cShowGearList(){
+
+    }
+
+    public void attackAllInRange(ArrayList<ZombieThread> zombies, GameThread character) {
+        ArrayList<CharacterGame> onRange = new ArrayList<CharacterGame>();
+        for (ZombieThread zombie : zombies) {
+            if (!(character.guerrero.getcName().equals("Guerrero de Impacto") && zombie.guerrero.getcName().equals("Guerrero aéreo"))) {
+                if (inRange(zombie, character)) {
+                    onRange.add(zombie.guerrero);
+                }
+            }
+        }
+        if (onRange.size() != 0) {
+            character.guerrero.cAttack(onRange);
+            //Si es un guerrero de impacto, es decir una bomba, se autodestruye
+            if (character.guerrero.getcName().equals("Guerrero de Impacto"))
+                character.guerrero.cDamage(character.guerrero.cLife);
+        }
+    }
+
+    public Boolean inRange(ZombieThread zombie, GameThread character) {
+
+        int range = this.cShowGearList().get(0).getgRange();
+
+        int xZombie = zombie.refLabel.getLocation().x;
+        int yZombie = zombie.refLabel.getLocation().y;
+
+        int xCharacter = character.refLabel.getLocation().x;
+        int yCharacter = character.refLabel.getLocation().y;
+
+        return ((abs(xZombie - xCharacter) <= range) && (abs(yZombie - yCharacter) <= range));
+    }
+
+
+    public ArrayList<Gear> cShowGearList() {
         ArrayList<Gear> gearList = new ArrayList<>();
         cGear.entrySet().forEach(entry -> {
             gearList.add(entry.getValue());
@@ -88,30 +123,31 @@ public class CharacterGame implements iPrototype {
         return gearList;
         //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
     }
-        
+
     @Override
     public iPrototype clone() {
         CharacterGame character = new CharacterGame(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel);
         character.setcGear(cGear);
         return character;
     }
+
     @Override
     public iPrototype deepClone() {
         //Revisar cuando se necesite una list con nuevas armas
         return clone();
     }
-    
-    public int cgetRange(){
-        for(int i=0; i< this.cShowGearList().size(); i++){
-            if(this.cShowGearList().get(i).isgActive()){
-                return this.cShowGearList().get(i).getgRange(); 
+
+    public int cgetRange() {
+        for (int i = 0; i < this.cShowGearList().size(); i++) {
+            if (this.cShowGearList().get(i).isgActive()) {
+                return this.cShowGearList().get(i).getgRange();
             }
         }
         return 0;
     }
 
-    public static class CharacterBuilder <T extends CharacterBuilder<T>> {
-        private String cName; 
+    public static class CharacterBuilder<T extends CharacterBuilder<T>> {
+        private String cName;
         private HashMap<Integer, Appearance> cAppearance;
         private int cSpawnLevel;
         private int cHitPS;
@@ -122,7 +158,7 @@ public class CharacterGame implements iPrototype {
         private int cLevel;
         private HashMap<String, Gear> cGear;
 
-       // @Override
+        // @Override
         public CharacterGame build() {
             return new CharacterGame(this);
         }
@@ -175,7 +211,7 @@ public class CharacterGame implements iPrototype {
             return this;
         }
 
-}
+    }
 
     public String getcName() {
         return cName;
