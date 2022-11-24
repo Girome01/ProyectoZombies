@@ -36,7 +36,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
    public void mostrarGanador(String ganador){
         JOptionPane.showMessageDialog(fondo_Juego,"Ganador: "+ganador,"Resultado de la batalla",JOptionPane.OK_OPTION);
         if(ganador.equalsIgnoreCase("Aliados")){
-            usuario.setuLevel(usuario.getuLevel()+1);
+            usuario.setLevel(usuario.getLevel()+1);
         }
         
         this.setVisible(false);
@@ -47,7 +47,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         frame.setVisible(true);
     } 
    
-    public JLabel generateLabel(String imagen, int xTripulante, int limit){
+    public JLabel generateLabel(String imagen, int xUser, int yUser){
         JLabel imageLabel = new JLabel();
         ImageIcon imageicon = new ImageIcon(imagen);
         int ancho=imageicon.getIconWidth();
@@ -58,9 +58,9 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         imageLabel.setOpaque(false);
         lbl_FondoBatalla.add(imageLabel);
         
-        int x = ((new Random()).nextInt(xTripulante - limit+1) + limit);
+        int x = 23*xUser; //23 por un numero de 1 a 25 para que el usuario escoja la posicion
         x = x-(x%23);
-        int y = ((new Random()).nextInt(270)/40) * 40;
+        int y = 30*yUser; //30 por un numero de 1 a 25 para que el usuario escoja la posicion
         y = y-(y%30);
         imageLabel.setLocation(x,y);
        
@@ -77,9 +77,9 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
             case 0: // arriba
                 if (y-30 >= 0) y = y-30; break;
             case 1: // abajo
-                if (y+30 <= 270) y = y+30; break;
-            case 2: // derecha
-                if (x+23 <= 565) x = x+23; break;
+                if (y+30 <= 750) y = y+30; break;
+            case 2: // izquirda
+                if (x+23 <= 575) x = x+23; break;
             default: //derecha
                 if (x-23 >= 0) x = x-23; break; 
         }
@@ -156,7 +156,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
 
         panelEscenario.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbl_FondoBatalla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Juego/ImagenesJuego/fondoBatalla_1.png"))); // NOI18N
+        lbl_FondoBatalla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectozombie/img/fondoBatalla_1.png"))); // NOI18N
 
         javax.swing.GroupLayout panelEscenarioLayout = new javax.swing.GroupLayout(panelEscenario);
         panelEscenario.setLayout(panelEscenarioLayout);
@@ -230,26 +230,26 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartActionPerformed
-        batalla.generateArmy();
-        batalla.generateEnemy();
+        batalla.generateDefense();
+        batalla.generateEnemies();
         batalla.startArmy();
-        batalla.startEnemy();
+        batalla.startEnemies();
 
     }//GEN-LAST:event_btn_StartActionPerformed
 
     private void btn_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StopActionPerformed
-        batalla.stopArmy();
+        batalla.stopGame();
     }//GEN-LAST:event_btn_StopActionPerformed
 
     private void btn_PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PauseActionPerformed
-        batalla.pauseArmy();
+        batalla.pauseGame();
     }//GEN-LAST:event_btn_PauseActionPerformed
 
     private void btn_NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NextActionPerformed
-        batalla.stopArmy();
+        batalla.stopGame();
         JOptionPane.showMessageDialog(fondo_Juego,"Ganador: Aliados","Resultado de la batalla",JOptionPane.OK_OPTION);
         
-        usuario.setuLevel(usuario.getuLevel()+1);
+        usuario.setLevel(usuario.getLevel()+1);
         
         this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(usuario);

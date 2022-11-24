@@ -4,6 +4,7 @@ import java.awt.Image;
 import javax.swing.*;
 import java.util.ArrayList;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.interfaz.campoBatalla_Juego;
 
 public class Game {
     private campoBatalla_Juego refPantalla;
@@ -24,8 +25,9 @@ public class Game {
     public void generateDefense(){
         for (int i = 0; i < listDefense.size(); i++) {
             String nombreArchivo = listDefense.get(i).getcAppearance(listDefense.get(i).getcLevel(),"STOP");
-            JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, );
-            this.defense.add(new GameThread(refPantalla, labelForThread, (i+1), listDefense.get(i)));
+            int[] position = listDefense.get(i).getPosition();
+            JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, position[0], position[1]);
+            this.defense.add(new WeaponThread(refPantalla, labelForThread, (i+1), listDefense.get(i)));
         }
     }
     public void levelUp(){}

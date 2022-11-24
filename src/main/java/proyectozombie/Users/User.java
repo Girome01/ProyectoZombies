@@ -1,8 +1,12 @@
 package proyectozombie.Users;
 
+import java.util.ArrayList;
+import proyectozombie.CharacterCreation.CharacterGame;
+
 public class User {
 
     private String name;
+    private ArrayList<CharacterGame> warriors;
     private int level;
 
     public String getName() {

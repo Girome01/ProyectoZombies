@@ -1,6 +1,5 @@
 package proyectozombie.Logica;
 
-import InterfazJuego.campoBatalla_Juego;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.Serializable;
@@ -10,6 +9,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.GameEnviroment.Zombies.Zombie;
+import proyectozombie.interfaz.campoBatalla_Juego;
 
 /**
  *
@@ -22,7 +23,7 @@ public class ZombieThread extends Thread implements Serializable{
     int numero;
     private boolean running = true;
     private boolean paused = false;
-    public CharacterGame guerrero;
+    public Zombie zombie;
     GameThread enemigo ;
 
     public ZombieThread(campoBatalla_Juego refPantalla, JLabel refLabel, int numero, CharacterGame guerrero) {

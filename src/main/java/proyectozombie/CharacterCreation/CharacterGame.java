@@ -15,7 +15,7 @@ public class CharacterGame implements iPrototype {
     protected int cSpawnLevel;
     protected int cHitPS;
     protected int cLife;
-    //private int[][] cStorageSpace;
+    private int[] position;
     protected int cStorageSpace;
     protected double cCost;
     protected int cLevel;
@@ -30,6 +30,7 @@ public class CharacterGame implements iPrototype {
         this.cStorageSpace = builder.cStorageSpace;
         this.cCost = builder.cCost;
         this.cLevel = builder.cLevel;
+        this.position = new int[2];
     }
 
     public CharacterGame(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife,
@@ -44,6 +45,15 @@ public class CharacterGame implements iPrototype {
         this.cLevel = cLevel;
     }
 
+    public int[] getPosition() {
+        return position;
+    }
+
+    public void setPosition(int positionX, int positionY) {
+        this.position[0] = positionX;
+        this.position[1] = positionY;
+    }
+    
     public void cLevelUp() {
         this.cLevel += 1;
     }
