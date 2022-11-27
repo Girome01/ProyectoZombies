@@ -4,7 +4,7 @@ import java.awt.Image;
 import javax.swing.*;
 import java.util.ArrayList;
 import proyectozombie.CharacterCreation.CharacterGame;
-import proyectozombie.interfaz.campoBatalla_Juego;
+import proyectozombie.Interfaz.campoBatalla_Juego;
 
 public class Game {
     private campoBatalla_Juego refPantalla;

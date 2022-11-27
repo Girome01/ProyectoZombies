@@ -94,36 +94,6 @@ public class CharacterGame implements iPrototype {
 
     }
 
-    public void attackAllInRange(ArrayList<ZombieThread> zombies, GameThread character) {
-        ArrayList<CharacterGame> onRange = new ArrayList<CharacterGame>();
-        for (ZombieThread zombie : zombies) {
-            if (!(character.guerrero.getcName().equals("Guerrero de Impacto") && zombie.guerrero.getcName().equals("Guerrero aéreo"))) {
-                if (inRange(zombie, character)) {
-                    onRange.add(zombie.guerrero);
-                }
-            }
-        }
-        if (onRange.size() != 0) {
-            character.guerrero.cAttack(onRange);
-            //Si es un guerrero de impacto, es decir una bomba, se autodestruye
-            if (character.guerrero.getcName().equals("Guerrero de Impacto"))
-                character.guerrero.cDamage(character.guerrero.cLife);
-        }
-    }
-
-    public Boolean inRange(ZombieThread zombie, GameThread character) {
-
-        int range = this.cShowGearList().get(0).getgRange();
-
-        int xZombie = zombie.refLabel.getLocation().x;
-        int yZombie = zombie.refLabel.getLocation().y;
-
-        int xCharacter = character.refLabel.getLocation().x;
-        int yCharacter = character.refLabel.getLocation().y;
-
-        return ((abs(xZombie - xCharacter) <= range) && (abs(yZombie - yCharacter) <= range));
-    }
-
 
     public ArrayList<Gear> cShowGearList() {
         ArrayList<Gear> gearList = new ArrayList<>();

@@ -9,6 +9,11 @@ public class User {
     private ArrayList<CharacterGame> warriors;
     private int level;
 
+    public User(String name, int level) {
+        this.name = name;
+        this.level = level;
+    }
+
     public String getName() {
         return name;
     }

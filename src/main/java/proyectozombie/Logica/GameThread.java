@@ -1,6 +1,5 @@
 package proyectozombie.Logica;
 
-import InterfazJuego.campoBatalla_Juego;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.Serializable;
@@ -10,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.Interfaz.campoBatalla_Juego;
 
 /**
  *

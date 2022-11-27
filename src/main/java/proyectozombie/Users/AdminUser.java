@@ -4,6 +4,15 @@ public class AdminUser extends User{
 
     private String password;
 
+    public AdminUser(String name, int level) {
+        super(name, level);
+    }
+
+    public AdminUser(String name, int level, String password) {
+        super(name, level);
+        this.password = password;
+    }
+
     public String getPassword() {
         return password;
     }
