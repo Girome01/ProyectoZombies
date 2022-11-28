@@ -41,7 +41,6 @@ public class GameThread extends Thread implements Serializable{
     }
 
 
-
      public void run(){
         
         while(running){            

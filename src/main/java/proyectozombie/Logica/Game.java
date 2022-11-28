@@ -102,7 +102,8 @@ public class Game {
         return null;
     }
 
-    public GameThread getEnemy(GameThread gameThread) {
+    //not sure TODO: review
+    public GameThread getEnemy(Thread gameThread) {
         return null;
     }
 
@@ -116,7 +117,8 @@ public class Game {
         refLabel.setOpaque(false);
     }
 
-    public GameThread getGanador(GameThread guerrero) {
+    //not sure TODO: review
+    public GameThread getGanador(Thread guerrero) {
         String ganador = "";
         boolean esArmy = this.defense.contains(guerrero);
         if (esArmy) {
