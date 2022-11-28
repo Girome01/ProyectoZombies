@@ -96,7 +96,7 @@ public class ingreso_Juego extends javax.swing.JFrame {
 
     private void btn_IngresarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresarJuegoActionPerformed
         // TODO add your handling code here:
-        User usuario = new User(txt_NombreUsuario.getText(), 1);
+        User usuario = new User(txt_NombreUsuario.getText(), 1, 20);
         this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);

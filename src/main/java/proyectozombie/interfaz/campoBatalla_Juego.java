@@ -69,7 +69,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
     
     }
     
-    public void moveLabel (JLabel label, JLabel arma){
+    public void moveLabel (JLabel label){
         int direccion = (new Random()).nextInt(4);
         int x = label.getLocation().x;
         int y = label.getLocation().y;

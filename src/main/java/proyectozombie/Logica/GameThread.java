@@ -23,11 +23,10 @@ public class GameThread extends Thread implements Serializable{
     private boolean paused = false;
     public CharacterGame guerrero;
     GameThread enemigo ;
-/*
+
     public GameThread(campoBatalla_Juego refPantalla, JLabel refLabel, JLabel refArma, int numero, CharacterGame guerrero) {
         this.refPantalla = refPantalla;
         this.refLabel = refLabel;
-        this.refArma = refArma;
         this.numero = numero;
         this.guerrero = guerrero;
     }
@@ -56,7 +55,7 @@ public class GameThread extends Thread implements Serializable{
                             cambiarImagen(url, refLabel);
                         }
                         sleep(1000);
-                        refPantalla.moveLabel(refLabel, refArma);
+                        refPantalla.moveLabel(refLabel);
                         url = guerrero.getcAppearance(guerrero.getcLevel(),"STOP");
                         if(url != null){
                             cambiarImagen(url, refLabel);
@@ -101,5 +100,5 @@ public class GameThread extends Thread implements Serializable{
         refLabel.setIcon(new ImageIcon(img));
         refLabel.setSize(ancho, alto);
         refLabel.setOpaque(false);
-    }*/
+    }
 }
