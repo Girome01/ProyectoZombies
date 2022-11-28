@@ -29,14 +29,15 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
   
    public campoBatalla_Juego(ArrayList<CharacterGame> listaPersonajesUsuario, User usuario) {
        this.listaPersonajesUsuario = listaPersonajesUsuario;
-        batalla = new Game(this,listaPersonajesUsuario);
+        //batalla = new Game(this,listaPersonajesUsuario);
         this.usuario=usuario;
         initComponents();
     }
    public void mostrarGanador(String ganador){
         JOptionPane.showMessageDialog(fondo_Juego,"Ganador: "+ganador,"Resultado de la batalla",JOptionPane.OK_OPTION);
         if(ganador.equalsIgnoreCase("Aliados")){
-            usuario.setLevel(usuario.getLevel()+1);
+            //usuario.setLevel(usuario.getLevel()+1);
+            usuario.subirLevel();
         }
         
         this.setVisible(false);
@@ -83,11 +84,11 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
             default: //derecha
                 if (x-23 >= 0) x = x-23; break; 
         }
-        if (batalla.isAvailable(x, y)){
+        /*if (batalla.isAvailable(x, y)){
             label.setLocation(x, y);
             if(arma != null)
                 arma.setLocation(x+22, y);
-        }
+        }*/
               
     }
     
@@ -230,23 +231,23 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartActionPerformed
-        batalla.generateDefense();
+        /*batalla.generateDefense();
         batalla.generateEnemies();
         batalla.startArmy();
-        batalla.startEnemies();
+        batalla.startEnemies();*/
 
     }//GEN-LAST:event_btn_StartActionPerformed
 
     private void btn_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StopActionPerformed
-        batalla.stopGame();
+        //batalla.stopGame();
     }//GEN-LAST:event_btn_StopActionPerformed
 
     private void btn_PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PauseActionPerformed
-        batalla.pauseGame();
+        //batalla.pauseGame();
     }//GEN-LAST:event_btn_PauseActionPerformed
 
     private void btn_NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NextActionPerformed
-        batalla.stopGame();
+        /*batalla.stopGame();
         JOptionPane.showMessageDialog(fondo_Juego,"Ganador: Aliados","Resultado de la batalla",JOptionPane.OK_OPTION);
         
         usuario.setLevel(usuario.getLevel()+1);
@@ -256,7 +257,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 150);
-        frame.setVisible(true);
+        frame.setVisible(true);*/
     }//GEN-LAST:event_btn_NextActionPerformed
                         
     /**

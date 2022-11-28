@@ -1,13 +1,14 @@
 package proyectozombie.Users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class UserDataBase {
+public class UserDataBase implements Serializable{
 
     protected ArrayList<User> listaUsuarios;
 
     public UserDataBase() {
-        listaUsuarios= new ArrayList<User>();
+        listaUsuarios = new ArrayList<User>();
     }
     public ArrayList<User> getListaUsuarios() {
         return listaUsuarios;

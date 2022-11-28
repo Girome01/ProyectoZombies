@@ -2,13 +2,19 @@ package proyectozombie.interfaz;
 
 import proyectozombie.CharacterCreation.*;
 import java.awt.Component;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import proyectozombie.GameEnviroment.Presets;
+import proyectozombie.GameEnviroment.Weapons.*;
+import proyectozombie.GameEnviroment.Zombies.*;
 import proyectozombie.Logica.FileManager;
 
 
@@ -23,17 +29,19 @@ import proyectozombie.Logica.FileManager;
  * @author monic
  */
 public class ingresarPersonajes extends javax.swing.JFrame {
-    ArrayList<CharacterGame> personajes;
-    String imageDir = "src/main/java/Juego/ImagenesJuego/";
+    private Presets personajes;
+    private String imageDir = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\";
+    private ArrayList<CharacterGame> ingresados = new ArrayList();
     
     public ingresarPersonajes() {
        initComponents();
        addTableHeader();
-       Object valor=(ArrayList<CharacterGame>) FileManager.readObject("src/main/java/CreacionPersonajes/Archivos/personajes.juego");   
+       Object valor = (Presets) FileManager.readObject(path+"personajes.juego");   
        if(valor!=null){
-            personajes=(ArrayList<CharacterGame>) FileManager.readObject("src/main/java/CreacionPersonajes/Archivos/personajes.juego");  
+            personajes = (Presets) FileManager.readObject(path+"personajes.juego");  
        }else{
-           personajes=new ArrayList<>();
+           personajes = new Presets();
        }
         
         generarTabla();
@@ -52,24 +60,25 @@ public class ingresarPersonajes extends javax.swing.JFrame {
         lbl_Titulo0 = new javax.swing.JLabel();
         txt_Campos = new javax.swing.JTextField();
         lbl_Usuario = new javax.swing.JLabel();
-        lbl_Usuario6 = new javax.swing.JLabel();
+        lbl_Campos = new javax.swing.JLabel();
         txt_Nombre = new javax.swing.JTextField();
-        lbl_Usuario5 = new javax.swing.JLabel();
+        lbl_Aparicion = new javax.swing.JLabel();
         txt_Aparicion = new javax.swing.JTextField();
-        lbl_Usuario3 = new javax.swing.JLabel();
+        lbl_Vida = new javax.swing.JLabel();
         txt_Vida = new javax.swing.JTextField();
         lbl_Nivel = new javax.swing.JLabel();
         txt_Nivel = new javax.swing.JTextField();
         combo_Tipos = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_Personajes = new javax.swing.JTable();
-        lbl_Usuario7 = new javax.swing.JLabel();
+        lbl_Ataque = new javax.swing.JLabel();
         txt_Ataque = new javax.swing.JTextField();
-        lbl_Costo1 = new javax.swing.JLabel();
-        txt_Costo = new javax.swing.JTextField();
+        lbl_Rango = new javax.swing.JLabel();
+        txt_Rango = new javax.swing.JTextField();
         btn_Ingresar = new javax.swing.JButton();
         btn_Apariencia = new javax.swing.JButton();
-        fondo_Juego = new javax.swing.JLabel();
+        lbl_Costo = new javax.swing.JLabel();
+        txt_Costo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingresar personajes");
@@ -105,15 +114,15 @@ public class ingresarPersonajes extends javax.swing.JFrame {
         panel_Fondo.add(lbl_Usuario);
         lbl_Usuario.setBounds(30, 70, 140, 30);
 
-        lbl_Usuario6.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_Usuario6.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
-        lbl_Usuario6.setForeground(new java.awt.Color(102, 0, 102));
-        lbl_Usuario6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Usuario6.setText("Campos:");
-        lbl_Usuario6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
-        lbl_Usuario6.setOpaque(true);
-        panel_Fondo.add(lbl_Usuario6);
-        lbl_Usuario6.setBounds(390, 70, 140, 30);
+        lbl_Campos.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_Campos.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        lbl_Campos.setForeground(new java.awt.Color(102, 0, 102));
+        lbl_Campos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Campos.setText("Campos:");
+        lbl_Campos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
+        lbl_Campos.setOpaque(true);
+        panel_Fondo.add(lbl_Campos);
+        lbl_Campos.setBounds(390, 70, 140, 30);
 
         txt_Nombre.setBackground(new java.awt.Color(102, 0, 102));
         txt_Nombre.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
@@ -125,15 +134,15 @@ public class ingresarPersonajes extends javax.swing.JFrame {
         panel_Fondo.add(txt_Nombre);
         txt_Nombre.setBounds(190, 70, 170, 30);
 
-        lbl_Usuario5.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_Usuario5.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
-        lbl_Usuario5.setForeground(new java.awt.Color(102, 0, 102));
-        lbl_Usuario5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Usuario5.setText("Aparición:");
-        lbl_Usuario5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
-        lbl_Usuario5.setOpaque(true);
-        panel_Fondo.add(lbl_Usuario5);
-        lbl_Usuario5.setBounds(390, 110, 140, 30);
+        lbl_Aparicion.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_Aparicion.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        lbl_Aparicion.setForeground(new java.awt.Color(102, 0, 102));
+        lbl_Aparicion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Aparicion.setText("Aparición:");
+        lbl_Aparicion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
+        lbl_Aparicion.setOpaque(true);
+        panel_Fondo.add(lbl_Aparicion);
+        lbl_Aparicion.setBounds(390, 110, 140, 30);
 
         txt_Aparicion.setBackground(new java.awt.Color(102, 0, 102));
         txt_Aparicion.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
@@ -145,15 +154,15 @@ public class ingresarPersonajes extends javax.swing.JFrame {
         panel_Fondo.add(txt_Aparicion);
         txt_Aparicion.setBounds(550, 110, 170, 30);
 
-        lbl_Usuario3.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_Usuario3.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
-        lbl_Usuario3.setForeground(new java.awt.Color(102, 0, 102));
-        lbl_Usuario3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Usuario3.setText("Vida:");
-        lbl_Usuario3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
-        lbl_Usuario3.setOpaque(true);
-        panel_Fondo.add(lbl_Usuario3);
-        lbl_Usuario3.setBounds(30, 110, 140, 30);
+        lbl_Vida.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_Vida.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        lbl_Vida.setForeground(new java.awt.Color(102, 0, 102));
+        lbl_Vida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Vida.setText("Vida:");
+        lbl_Vida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
+        lbl_Vida.setOpaque(true);
+        panel_Fondo.add(lbl_Vida);
+        lbl_Vida.setBounds(30, 110, 140, 30);
 
         txt_Vida.setBackground(new java.awt.Color(102, 0, 102));
         txt_Vida.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
@@ -183,8 +192,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
         combo_Tipos.setBackground(new java.awt.Color(0, 0, 0));
         combo_Tipos.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
         combo_Tipos.setForeground(new java.awt.Color(102, 0, 102));
-        combo_Tipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guerrero de contacto", "Guerrero de mediano alcance", "Guerrero aéreo" }));
-        combo_Tipos.setSelectedIndex(-1);
+        combo_Tipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Armas: De contacto", "Armas: Mediano alcance", "Armas: Aéreos", "Armas: Impacto", "Armas: Ataque multiple", "Armas: Bloques", "Zombie: De contacto", "Zombie: Aéreo", "Zombie: Mediano alcance", "Zombie: Choque" }));
         combo_Tipos.setToolTipText("Tipo guerrero");
         combo_Tipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,35 +216,35 @@ public class ingresarPersonajes extends javax.swing.JFrame {
         panel_Fondo.add(jScrollPane2);
         jScrollPane2.setBounds(30, 340, 720, 130);
 
-        lbl_Usuario7.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_Usuario7.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
-        lbl_Usuario7.setForeground(new java.awt.Color(102, 0, 102));
-        lbl_Usuario7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Usuario7.setText("Ataque:");
-        lbl_Usuario7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
-        lbl_Usuario7.setOpaque(true);
-        panel_Fondo.add(lbl_Usuario7);
-        lbl_Usuario7.setBounds(30, 150, 140, 30);
+        lbl_Ataque.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_Ataque.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        lbl_Ataque.setForeground(new java.awt.Color(102, 0, 102));
+        lbl_Ataque.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Ataque.setText("Ataque:");
+        lbl_Ataque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
+        lbl_Ataque.setOpaque(true);
+        panel_Fondo.add(lbl_Ataque);
+        lbl_Ataque.setBounds(30, 150, 140, 30);
 
         txt_Ataque.setBackground(new java.awt.Color(102, 0, 102));
         txt_Ataque.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
         panel_Fondo.add(txt_Ataque);
         txt_Ataque.setBounds(190, 150, 170, 30);
 
-        lbl_Costo1.setBackground(new java.awt.Color(255, 255, 255));
-        lbl_Costo1.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
-        lbl_Costo1.setForeground(new java.awt.Color(102, 0, 102));
-        lbl_Costo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Costo1.setText("Costo:");
-        lbl_Costo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
-        lbl_Costo1.setOpaque(true);
-        panel_Fondo.add(lbl_Costo1);
-        lbl_Costo1.setBounds(30, 190, 140, 30);
+        lbl_Rango.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_Rango.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        lbl_Rango.setForeground(new java.awt.Color(102, 0, 102));
+        lbl_Rango.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Rango.setText("Rango: ");
+        lbl_Rango.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
+        lbl_Rango.setOpaque(true);
+        panel_Fondo.add(lbl_Rango);
+        lbl_Rango.setBounds(30, 230, 140, 30);
 
-        txt_Costo.setBackground(new java.awt.Color(102, 0, 102));
-        txt_Costo.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
-        panel_Fondo.add(txt_Costo);
-        txt_Costo.setBounds(190, 190, 170, 30);
+        txt_Rango.setBackground(new java.awt.Color(102, 0, 102));
+        txt_Rango.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        panel_Fondo.add(txt_Rango);
+        txt_Rango.setBounds(190, 230, 170, 30);
 
         btn_Ingresar.setBackground(new java.awt.Color(0, 0, 0));
         btn_Ingresar.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
@@ -248,7 +256,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
             }
         });
         panel_Fondo.add(btn_Ingresar);
-        btn_Ingresar.setBounds(220, 260, 150, 40);
+        btn_Ingresar.setBounds(220, 270, 150, 40);
 
         btn_Apariencia.setBackground(new java.awt.Color(0, 0, 0));
         btn_Apariencia.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
@@ -260,11 +268,22 @@ public class ingresarPersonajes extends javax.swing.JFrame {
             }
         });
         panel_Fondo.add(btn_Apariencia);
-        btn_Apariencia.setBounds(400, 260, 150, 40);
+        btn_Apariencia.setBounds(400, 270, 150, 40);
 
-        fondo_Juego.setIcon(new javax.swing.ImageIcon("D:\\Documents\\GitHub\\creacionPersonajesGui\\src\\main\\java\\CreacionPersonajes\\Interfaces\\ImagenesCreacionPersonajes\\FondoPantallas.png")); // NOI18N
-        panel_Fondo.add(fondo_Juego);
-        fondo_Juego.setBounds(0, -20, 790, 520);
+        lbl_Costo.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_Costo.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        lbl_Costo.setForeground(new java.awt.Color(102, 0, 102));
+        lbl_Costo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Costo.setText("Costo:");
+        lbl_Costo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
+        lbl_Costo.setOpaque(true);
+        panel_Fondo.add(lbl_Costo);
+        lbl_Costo.setBounds(30, 190, 140, 30);
+
+        txt_Costo.setBackground(new java.awt.Color(102, 0, 102));
+        txt_Costo.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        panel_Fondo.add(txt_Costo);
+        txt_Costo.setBounds(190, 190, 170, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -312,69 +331,215 @@ public class ingresarPersonajes extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        String nombre=txt_Nombre.getText();
-        String vidaStr=txt_Vida.getText();
-        String ataqueStr=txt_Ataque.getText();
-        String costoStr=txt_Costo.getText();
-        String camposStr=txt_Campos.getText();
-        String aparicionStr=txt_Aparicion.getText();
-        String nivelStr=txt_Nivel.getText();
+        String nombre = txt_Nombre.getText();
+        String vidaStr = txt_Vida.getText();
+        String ataqueStr = txt_Ataque.getText();
+        String costoStr = txt_Rango.getText();
+        String camposStr = txt_Campos.getText();
+        String aparicionStr = txt_Aparicion.getText();
+        String nivelStr = txt_Nivel.getText();
+        String rangoStr = txt_Rango.getText();
         int guerreroEscogido= combo_Tipos.getSelectedIndex();
         String guerreroEscogidoStr= combo_Tipos.getItemAt(guerreroEscogido);
         
 
         if(!nombre.isBlank() && !vidaStr.isBlank() && !ataqueStr.isBlank() && !camposStr.isBlank() &&
-            !costoStr.isBlank() && !aparicionStr.isBlank() && !guerreroEscogidoStr.isBlank() && !nivelStr.isBlank()){
-            int vida=Integer.parseInt(vidaStr);
-            int ataque=Integer.parseInt(ataqueStr);
-            int campos=Integer.parseInt(camposStr);
-            int aparicion=Integer.parseInt(aparicionStr);
-            int nivel=Integer.parseInt(nivelStr);
-            double costo=Double.parseDouble(costoStr);
+            !costoStr.isBlank() && !aparicionStr.isBlank() && !guerreroEscogidoStr.isBlank() && 
+                !nivelStr.isBlank() && !rangoStr.isBlank()){
+            int vida = Integer.parseInt(vidaStr);
+            int ataque = Integer.parseInt(ataqueStr);
+            int campos = Integer.parseInt(camposStr);
+            int aparicion = Integer.parseInt(aparicionStr);
+            int nivel = Integer.parseInt(nivelStr);
+            int rango = Integer.parseInt(rangoStr);
+            double costo = Double.parseDouble(costoStr);
             
+            //Definir las apariencias default
             Appearance defaultAppearance = new Appearance();
             defaultAppearance.addAppearance("lapida", imageDir+"lapida.png");
-            defaultAppearance.addAppearance("puño", imageDir+"puño.png");
-            defaultAppearance.addAppearance("STOP", imageDir+"rojoD.png");
+            //defaultAppearance.addAppearance("STOP", imageDir+"rojoD.png");
             
             HashMap<Integer, Appearance> defaultAppearanceHM = new HashMap<>();
             defaultAppearanceHM.put(0, defaultAppearance);
             
-            if(guerreroEscogido==0){
-                ContactWarrior barbaro = (ContactWarrior) new ContactWarrior.ContactWarriorBuilder()
-                        .setcName(nombre)
-                        .setcLife(vida)
-                        .setcHitPS(ataque)
-                        .setcCost(costo)
-                        .setcStorageSpace(campos)
-                        .setcSpawnLevel(nivel)
-                        .setcAppearance(defaultAppearanceHM)
-                        .setcLevel(nivel).build();
-                personajes.add(barbaro);
-            }else if(guerreroEscogido==1){
-                HalfRangeWarrior arquera = (HalfRangeWarrior) new HalfRangeWarrior.HalfRangeWarriorBuilder()
-                        .setcName(nombre)
-                        .setcLife(vida)
-                        .setcHitPS(ataque)
-                        .setcCost(costo)
-                        .setcStorageSpace(campos)
-                        .setcSpawnLevel(nivel)
-                        .setcAppearance(defaultAppearanceHM)
-                        .setcLevel(nivel).build();
-                personajes.add(arquera);
-            }else{
-                AerialWarrior dragon = (AerialWarrior) new AerialWarrior.AerialWarriorBuilder()
-                        .setcName(nombre)
-                        .setcLife(vida)
-                        .setcHitPS(ataque)
-                        .setcCost(costo)
-                        .setcStorageSpace(campos)
-                        .setcSpawnLevel(nivel)
-                        .setcAppearance(defaultAppearanceHM)
-                        .setcLevel(nivel).build();
-                personajes.add(dragon);
+            Gear gearItem = null;
+            
+            switch (guerreroEscogido) {
+                case 0:
+                    ContactWeapon contactWeapon = (ContactWeapon) new ContactWeapon.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    contactWeapon.cAddGear("Gear", gearItem);
+                    
+                    personajes.addWeapon(contactWeapon);
+                    ingresados.add(contactWeapon);
+                    break;
+                case 1:
+                    MediumRange mediumRange = (MediumRange) new MediumRange.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    mediumRange.cAddGear("Gear", gearItem);
+                    
+                    personajes.addWeapon(mediumRange);
+                    ingresados.add(mediumRange);
+                    break;
+                case 2:
+                    Aerial aerial = (Aerial) new Aerial.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    aerial.cAddGear("Gear", gearItem);
+                                    
+                    personajes.addWeapon(aerial);
+                    ingresados.add(aerial);
+                    break;
+                case 3:
+                    Impact impacto = (Impact) new Impact.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    impacto.cAddGear("Gear", gearItem);
+                    
+                    personajes.addWeapon(impacto);
+                    ingresados.add(impacto);
+                    break;
+                case 4:
+                    MultiAttack multiAttack = (MultiAttack) new MultiAttack.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    multiAttack.cAddGear("Gear", gearItem);
+                    
+                    personajes.addWeapon(multiAttack);
+                    ingresados.add(multiAttack);
+                    break;
+                case 5:
+                    Blocks block = (Blocks) new Blocks.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    block.cAddGear("Gear", gearItem);
+                    
+                    personajes.addWeapon(block);
+                    ingresados.add(block);
+                    break;
+                case 6:
+                    ContactZombie contactZ = (ContactZombie) new ContactZombie.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    contactZ.cAddGear("Gear", gearItem);
+                    
+                    personajes.addZombie(contactZ);
+                    ingresados.add(contactZ);
+                    break;
+                case 7:
+                    AerialZombie aerialZ = (AerialZombie) new AerialZombie.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    aerialZ.cAddGear("Gear", gearItem);
+                    
+                    personajes.addZombie(aerialZ);
+                    ingresados.add(aerialZ);
+                    break;
+                case 8:
+                    HalfRangeZombie halfRangeZ = (HalfRangeZombie) new HalfRangeZombie.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    halfRangeZ.cAddGear("Gear", gearItem);
+                    
+                    personajes.addZombie(halfRangeZ);
+                    ingresados.add(halfRangeZ);
+                    break;
+                case 9:
+                    SmashZombie smashZ = (SmashZombie) new SmashZombie.CharacterBuilder()
+                            .setcName(nombre)
+                            .setcLife(vida)
+                            .setcHitPS(ataque)
+                            .setcCost(costo)
+                            .setcStorageSpace(campos)
+                            .setcSpawnLevel(nivel)
+                            .setcAppearance(defaultAppearanceHM)
+                            .setcLevel(nivel).build();
+                    
+                    gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
+                    smashZ.cAddGear("Gear", gearItem);
+                    
+                    personajes.addZombie(smashZ);
+                    ingresados.add(smashZ);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(panel_Fondo,"Esa arma o zombie no es valido.","Atención",JOptionPane.WARNING_MESSAGE);
+                    break;
             }
-            FileManager.writeObject(personajes,"src/main/java/CreacionPersonajes/Archivos/personajes.juego");
+            FileManager.writeObject(personajes, this.path+"personajes.juego");
          
             
             //JLabel imageLabel = new JLabel();
@@ -390,13 +555,14 @@ public class ingresarPersonajes extends javax.swing.JFrame {
 
     private void btn_AparienciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AparienciaActionPerformed
         // TODO add your handling code here:
-            ingresarPersonajes window=this;
+            ingresarPersonajes window = this;
             window.setVisible(false);
-            ingresarApariencia frame = new ingresarApariencia(personajes);
+            ingresarApariencia frame = new ingresarApariencia(ingresados, personajes);
             frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
             frame.pack();
             frame.setLocation(290, 50);
             frame.setVisible(true);
+            
     }//GEN-LAST:event_btn_AparienciaActionPerformed
 DefaultTableModel model;
     
@@ -434,14 +600,14 @@ DefaultTableModel model;
  
     }
     private void generarTabla(){
-        for(int i=0;i<personajes.size();i++){
-            String nombre=personajes.get(i).getcName();
-            int nivel=personajes.get(i).getcLevel();
-            int aparicion=personajes.get(i).getcSpawnLevel();
-            int vida=personajes.get(i).getcLife();
-            int ataque=personajes.get(i).getcHitPS();
-            int campos=personajes.get(i).getcStorageSpace();
-            double costo=personajes.get(i).getcCost();
+        for(int i = 0; i < ingresados.size(); i++){
+            String nombre = ingresados.get(i).getcName();
+            int nivel = ingresados.get(i).getcLevel();
+            int aparicion = ingresados.get(i).getcSpawnLevel();
+            int vida = ingresados.get(i).getcLife();
+            int ataque = ingresados.get(i).getcHitPS();
+            int campos = ingresados.get(i).getcStorageSpace();
+            double costo = ingresados.get(i).getcCost();
 
             model.addRow(new Object[]{nombre, nivel, aparicion, vida, ataque, campos, costo});
         }
@@ -454,7 +620,7 @@ DefaultTableModel model;
         txt_Nombre.setText("");
         txt_Campos.setText("");
         txt_Aparicion.setText("");
-        txt_Costo.setText("");
+        txt_Rango.setText("");
         txt_Ataque.setText("");
         txt_Nivel.setText("");
         combo_Tipos.setSelectedIndex(-1);
@@ -509,16 +675,16 @@ DefaultTableModel model;
     private javax.swing.JButton btn_Apariencia;
     private javax.swing.JButton btn_Ingresar;
     private javax.swing.JComboBox<String> combo_Tipos;
-    private javax.swing.JLabel fondo_Juego;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lbl_Costo1;
+    private javax.swing.JLabel lbl_Aparicion;
+    private javax.swing.JLabel lbl_Ataque;
+    private javax.swing.JLabel lbl_Campos;
+    private javax.swing.JLabel lbl_Costo;
     private javax.swing.JLabel lbl_Nivel;
+    private javax.swing.JLabel lbl_Rango;
     private javax.swing.JLabel lbl_Titulo0;
     private javax.swing.JLabel lbl_Usuario;
-    private javax.swing.JLabel lbl_Usuario3;
-    private javax.swing.JLabel lbl_Usuario5;
-    private javax.swing.JLabel lbl_Usuario6;
-    private javax.swing.JLabel lbl_Usuario7;
+    private javax.swing.JLabel lbl_Vida;
     private javax.swing.JPanel panel_Fondo;
     private javax.swing.JTable table_Personajes;
     private javax.swing.JTextField txt_Aparicion;
@@ -527,6 +693,7 @@ DefaultTableModel model;
     private javax.swing.JTextField txt_Costo;
     private javax.swing.JTextField txt_Nivel;
     private javax.swing.JTextField txt_Nombre;
+    private javax.swing.JTextField txt_Rango;
     private javax.swing.JTextField txt_Vida;
     // End of variables declaration//GEN-END:variables
 }

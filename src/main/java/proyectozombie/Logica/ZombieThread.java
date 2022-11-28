@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.GameEnviroment.Zombies.Zombie;
-import proyectozombie.Interfaz.campoBatalla_Juego;
+import proyectozombie.interfaz.campoBatalla_Juego;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ZombieThread extends Thread implements Serializable{
     private boolean paused = false;
     public Zombie zombie;
     GameThread enemigo ;
-
+/*
     public ZombieThread(campoBatalla_Juego refPantalla, JLabel refLabel, int numero, CharacterGame guerrero) {
         this.refPantalla = refPantalla;
         this.refLabel = refLabel;
@@ -99,5 +99,5 @@ public class ZombieThread extends Thread implements Serializable{
         refLabel.setIcon(new ImageIcon(img));
         refLabel.setSize(ancho, alto);
         refLabel.setOpaque(false);
-    }
+    }*/
 }

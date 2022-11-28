@@ -205,8 +205,16 @@ public class CharacterGame implements iPrototype {
         return cAppearance.get(lvl).getAppearance(actApearance);
     }
 
-    public void setcAppearance(HashMap<Integer, Appearance> cAppearance) {
-        this.cAppearance = cAppearance;
+    public void setcAppearance(int lvl, Appearance appearance) {
+        cAppearance.put(lvl, appearance);
+    }
+    
+    public HashMap<Integer, Appearance> getcAppearance2() {
+        return cAppearance;
+    }
+    
+    public String getcAppearance3(int lvl, String actApearance) {
+        return cAppearance.get(lvl).getAppearance(actApearance.toUpperCase().strip());
     }
 
     public int getcSpawnLevel() {

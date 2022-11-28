@@ -8,8 +8,8 @@ public class PFCharacter {
    
     public static void addPrototype(String name, CharacterGame prototype) {
         pfCharacters.put(name.toUpperCase().strip(), prototype);
-        
     }
+    
     public static ArrayList<CharacterGame> getPrototype(String key, int quantity) {
         ArrayList<CharacterGame> newCharacters = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {

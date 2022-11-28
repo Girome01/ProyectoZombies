@@ -5,6 +5,7 @@
  */
 package proyectozombie.interfaz;
 
+import java.util.ArrayList;
 import proyectozombie.Users.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -22,9 +23,11 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
      */
     public inicioSesion_Juego() {
         listaUsuarios = new UserDataBase();
-        Object valor=(UserDataBase) FileManager.readObject("C:\\Users\\monic\\OneDrive - Estudiantes ITCR\\Documentos\\NetBeansProjects\\proyecto_HerenciaALTrono\\src\\archivosSerializados\\usuarios.juego");   
-        if(valor!=null)
-            listaUsuarios=(UserDataBase) FileManager.readObject("C:\\Users\\monic\\OneDrive - Estudiantes ITCR\\Documentos\\NetBeansProjects\\proyecto_HerenciaALTrono\\src\\archivosSerializados\\usuarios.juego");   
+        Object valor=(UserDataBase) FileManager.readObject("C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\usuarios.juego");
+        if(valor != null){
+            listaUsuarios = (UserDataBase) valor;
+        }  
+        System.out.println(listaUsuarios.getListaUsuarios().size());
         initComponents();
     }
 
@@ -45,6 +48,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         lbl_Usuario = new javax.swing.JLabel();
         btn_Ingresar = new javax.swing.JButton();
         txt_Contrasenna = new javax.swing.JPasswordField();
+        lbl_Titulo2 = new javax.swing.JLabel();
         fondo_Juego = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,7 +66,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         lbl_Contrasenna.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
         lbl_Contrasenna.setOpaque(true);
         panel_Fondo.add(lbl_Contrasenna);
-        lbl_Contrasenna.setBounds(140, 300, 170, 27);
+        lbl_Contrasenna.setBounds(200, 330, 170, 27);
 
         lbl_Titulo0.setBackground(new java.awt.Color(0, 0, 0));
         lbl_Titulo0.setFont(new java.awt.Font("VCR OSD Mono", 0, 48)); // NOI18N
@@ -87,7 +91,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         txt_Usuario.setBackground(new java.awt.Color(102, 0, 102));
         txt_Usuario.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
         panel_Fondo.add(txt_Usuario);
-        txt_Usuario.setBounds(320, 240, 310, 30);
+        txt_Usuario.setBounds(400, 220, 310, 30);
 
         lbl_Usuario.setBackground(new java.awt.Color(255, 255, 255));
         lbl_Usuario.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
@@ -97,7 +101,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         lbl_Usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
         lbl_Usuario.setOpaque(true);
         panel_Fondo.add(lbl_Usuario);
-        lbl_Usuario.setBounds(150, 240, 140, 30);
+        lbl_Usuario.setBounds(200, 220, 180, 30);
 
         btn_Ingresar.setBackground(new java.awt.Color(0, 0, 0));
         btn_Ingresar.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
@@ -111,13 +115,23 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
             }
         });
         panel_Fondo.add(btn_Ingresar);
-        btn_Ingresar.setBounds(380, 340, 150, 40);
+        btn_Ingresar.setBounds(370, 390, 150, 40);
 
         txt_Contrasenna.setBackground(new java.awt.Color(102, 0, 102));
         panel_Fondo.add(txt_Contrasenna);
-        txt_Contrasenna.setBounds(320, 300, 310, 30);
+        txt_Contrasenna.setBounds(390, 330, 310, 30);
 
-        fondo_Juego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/herenciaAlTrono/imagenes_Juego/fondo_Juego.jpg"))); // NOI18N
+        lbl_Titulo2.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_Titulo2.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
+        lbl_Titulo2.setForeground(new java.awt.Color(102, 0, 102));
+        lbl_Titulo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Titulo2.setText("Solo para administradores");
+        lbl_Titulo2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 0, 102)));
+        lbl_Titulo2.setOpaque(true);
+        panel_Fondo.add(lbl_Titulo2);
+        lbl_Titulo2.setBounds(200, 270, 500, 30);
+
+        fondo_Juego.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\fondo_Juego.jpg")); // NOI18N
         panel_Fondo.add(fondo_Juego);
         fondo_Juego.setBounds(-260, -140, 1570, 675);
 
@@ -139,47 +153,59 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
 
     private void btn_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresarActionPerformed
         // TODO add your handling code here:
-        String usuario=txt_Usuario.getText().trim().toUpperCase();
-        String contrasenna=String.valueOf(txt_Contrasenna.getPassword()).trim().toUpperCase();
-        String user="ADMIN";
-        String password="ADMIN";
-       
-        if(usuario.equals(user) && contrasenna.equals(password)){
-                this.setVisible(false);
-                ingresarPersonajes frame = new ingresarPersonajes();
-                frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setLocation(290, 150);
-                frame.setVisible(true);
-                return;
-        }else if(!usuario.isBlank() && !contrasenna.isBlank()){
-            User nuevo=new User(usuario,contrasenna.toString());
-            for(int i=0; i<listaUsuarios.getListaUsuarios().size();i++){
-                if(usuario.equals(listaUsuarios.getListaUsuarios().get(i).getNombreUsuario().toString()) &&
-                   contrasenna.equals(listaUsuarios.getListaUsuarios().get(i).getContrasenna().toString())){
-                    nuevo=listaUsuarios.getListaUsuarios().get(i);
-                    this.setVisible(false);
+        String usuario = txt_Usuario.getText().trim().toUpperCase();
+        String contrasenna = String.valueOf(txt_Contrasenna.getPassword()).trim().toUpperCase();
+        ArrayList<User> lista = listaUsuarios.getListaUsuarios();
+        User nuevo = new User(usuario,0,20); //nombre, lvl, campos
+        for (int i = 0; i < lista.size(); i++) {
+            System.out.println("Hay usuarios");
+            if(!usuario.isBlank()){
+                if(usuario.equals(lista.get(i).getName())){
+                    if( !contrasenna.isBlank()){
+                            try{
+                                AdminUser admin = (AdminUser) lista.get(i);                     
+                                if(usuario.equals(admin.getName()) &&
+                                        contrasenna.equals(admin.getPassword())){
+                                    System.out.println("Admin: "+admin.getName()+"  "+"Contrasenna: "+admin.getPassword());
+                                    this.setVisible(false);
+                                    ingresarPersonajes frame = new ingresarPersonajes();
+                                    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                                    frame.pack();
+                                    frame.setLocation(290, 150);
+                                    frame.setVisible(true);
+                                    return;
+                                }
+                            }
+                            catch(Exception e){
+                                JOptionPane.showMessageDialog(panel_Fondo,"El usuario no tiene derechos de admin","Precaución Usuario",JOptionPane.WARNING_MESSAGE);
+                                return;
+                            }
+                    }
+                    
+                    nuevo = lista.get(i);
+                    System.out.println("User: "+nuevo.getName());
+                    /*this.setVisible(false);
                     escogerPartida_Juego frame = new escogerPartida_Juego(nuevo);
                     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
                     frame.pack();
                     frame.setLocation(290, 150);
-                    frame.setVisible(true);
-                    return;      
-                }else{
-                    break;
+                    frame.setVisible(true);*/
+                    return;
                 }
+            
+            }else{
+                JOptionPane.showMessageDialog(panel_Fondo,"Los campos están vacíos.","Precaución guerrero",JOptionPane.WARNING_MESSAGE);
             }
-            listaUsuarios.agregarUsuario(nuevo);  
-            FileManager.writeObject(listaUsuarios, "C:\\Users\\monic\\OneDrive - Estudiantes ITCR\\Documentos\\NetBeansProjects\\proyecto_HerenciaALTrono\\src\\archivosSerializados\\usuarios.juego");   
-            this.setVisible(false);
-            escogerPersonajes_Juego frame = new escogerPersonajes_Juego(nuevo);
-            frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setLocation(290, 150);
-            frame.setVisible(true);
-        }else{
-         JOptionPane.showMessageDialog(panel_Fondo,"Los campos están vacíos.","Precaución guerrero",JOptionPane.WARNING_MESSAGE);        
-        } 
+        }
+        listaUsuarios.agregarUsuario(nuevo);  
+        FileManager.writeObject(listaUsuarios, "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\usuarios.juego");   
+        System.out.println("Nuevo Usuario: "+nuevo.getName());
+        this.setVisible(false);
+        escogerPersonajes_Juego frame = new escogerPersonajes_Juego(nuevo);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocation(290, 150);
+        frame.setVisible(true);        
     }//GEN-LAST:event_btn_IngresarActionPerformed
 
     /**
@@ -232,6 +258,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Contrasenna;
     private javax.swing.JLabel lbl_Titulo0;
     private javax.swing.JLabel lbl_Titulo1;
+    private javax.swing.JLabel lbl_Titulo2;
     private javax.swing.JLabel lbl_Usuario;
     private javax.swing.JPanel panel_Fondo;
     private javax.swing.JPasswordField txt_Contrasenna;

@@ -41,37 +41,50 @@ public class FileManager {
     }
 
     // escribe un objeto
-    public static void writeObject(Object obj, String filePath) {
-        try {
+    public static void writeObject(Object obj, String filePath)
+    {
+        try{
             //use buffering
             OutputStream file = new FileOutputStream(filePath);
             OutputStream buffer = new BufferedOutputStream(file);
-            try (ObjectOutput output = new ObjectOutputStream(buffer)) {
+            ObjectOutput output = new ObjectOutputStream(buffer);
+            try{
                 // escribe el objeto
-                output.writeObject(obj);
+              output.writeObject(obj);
             }
-        } catch (IOException ex) {
+            finally{
+              output.close();
+            }
+          }  
+          catch(IOException ex){
             System.out.println(ex.getMessage());
         }
     }
 
     // lee un objeto
-    public static Object readObject(String filePath) {
-        try {
+    public static Object readObject(String filePath)
+    {
+        try{
             //use buffering
             InputStream file = new FileInputStream(filePath);
             InputStream buffer = new BufferedInputStream(file);
-            try (ObjectInput input = new ObjectInputStream(buffer)) {
-                //deserialize the List
-                return input.readObject();
+            ObjectInput input = new ObjectInputStream (buffer);
+            try{
+              //deserialize the List
+              return input.readObject();
             }
-        } catch (ClassNotFoundException ex) {
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-
-        }
+            finally{
+              input.close();
+            }
+          }
+          catch(ClassNotFoundException ex){
+           
+          }
+          catch(IOException ex){
+                System.out.println(ex.getMessage());
+            
+          }
         return null;
-    }
+    } 
 
 }

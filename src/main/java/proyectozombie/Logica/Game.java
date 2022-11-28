@@ -4,7 +4,7 @@ import java.awt.Image;
 import javax.swing.*;
 import java.util.ArrayList;
 import proyectozombie.CharacterCreation.CharacterGame;
-import proyectozombie.Interfaz.campoBatalla_Juego;
+import proyectozombie.interfaz.campoBatalla_Juego;
 
 public class Game {
     private campoBatalla_Juego refPantalla;
@@ -12,7 +12,7 @@ public class Game {
     private ArrayList<ZombieThread> enemies;
     protected ArrayList<CharacterGame> listDefense;
     protected ArrayList<CharacterGame> listEnemies;
-
+/*
     public Game(campoBatalla_Juego refPantalla, ArrayList<CharacterGame> personajes) {
        this.refPantalla = refPantalla;
        this.listDefense = personajes;
@@ -104,5 +104,5 @@ public class Game {
         refLabel.setSize(ancho, alto);
         refLabel.setOpaque(false);
     }
-
+*/
 }

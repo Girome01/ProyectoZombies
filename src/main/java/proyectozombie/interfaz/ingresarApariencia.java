@@ -15,6 +15,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.text.html.HTMLDocument;
+import proyectozombie.GameEnviroment.Presets;
 import proyectozombie.Logica.FileManager;
 
 
@@ -30,12 +32,16 @@ import proyectozombie.Logica.FileManager;
  */
 public class ingresarApariencia extends javax.swing.JFrame {
     private ArrayList<CharacterGame> personajes;
-    String imageDir = "src/main/java/Juego/ImagenesJuego/";
+    private Presets presets;
+    private String imageDir = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\";
     
-    public ingresarApariencia(ArrayList<CharacterGame> personajesAgregados) {
+    public ingresarApariencia(ArrayList<CharacterGame> personajesAgregados, Presets presets) {
         initComponents();
         addTableHeader();
-        personajes=(ArrayList<CharacterGame>) FileManager.readObject("src/main/java/CreacionPersonajes/Archivos/personajes.juego");   
+        //personajes = (ArrayList<CharacterGame>) FileManager.readObject(path+"personajes.juego");   
+        this.personajes = personajesAgregados;
+        this.presets = presets;
         generarTabla();
         generarComboBox();
     }
@@ -59,7 +65,7 @@ public class ingresarApariencia extends javax.swing.JFrame {
         btn_ImagenApariencia = new javax.swing.JButton();
         lbl_ImagenApariencia = new javax.swing.JLabel();
         btn_Ingresar = new javax.swing.JButton();
-        btn_Gear = new javax.swing.JButton();
+        btn_Terminar = new javax.swing.JButton();
         combo_Personajes = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_Apariencias = new javax.swing.JTable();
@@ -153,17 +159,17 @@ public class ingresarApariencia extends javax.swing.JFrame {
         panel_Fondo.add(btn_Ingresar);
         btn_Ingresar.setBounds(400, 250, 150, 40);
 
-        btn_Gear.setBackground(new java.awt.Color(0, 0, 0));
-        btn_Gear.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        btn_Gear.setForeground(new java.awt.Color(102, 0, 102));
-        btn_Gear.setText("Gears");
-        btn_Gear.addActionListener(new java.awt.event.ActionListener() {
+        btn_Terminar.setBackground(new java.awt.Color(0, 0, 0));
+        btn_Terminar.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        btn_Terminar.setForeground(new java.awt.Color(102, 0, 102));
+        btn_Terminar.setText("Terminar");
+        btn_Terminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_GearActionPerformed(evt);
+                btn_TerminarActionPerformed(evt);
             }
         });
-        panel_Fondo.add(btn_Gear);
-        btn_Gear.setBounds(600, 250, 150, 40);
+        panel_Fondo.add(btn_Terminar);
+        btn_Terminar.setBounds(600, 250, 150, 40);
 
         combo_Personajes.setBackground(new java.awt.Color(0, 0, 0));
         combo_Personajes.setFont(new java.awt.Font("VCR OSD Mono", 0, 18)); // NOI18N
@@ -200,8 +206,6 @@ public class ingresarApariencia extends javax.swing.JFrame {
         lbl_Usuario1.setOpaque(true);
         panel_Fondo.add(lbl_Usuario1);
         lbl_Usuario1.setBounds(70, 70, 140, 30);
-
-        fondo_Juego.setIcon(new javax.swing.ImageIcon("D:\\Documents\\GitHub\\creacionPersonajesGui\\src\\main\\java\\CreacionPersonajes\\Interfaces\\ImagenesCreacionPersonajes\\FondoPantallas.png")); // NOI18N
         panel_Fondo.add(fondo_Juego);
         fondo_Juego.setBounds(0, -20, 790, 520);
 
@@ -259,26 +263,27 @@ public class ingresarApariencia extends javax.swing.JFrame {
 
     private void btn_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IngresarActionPerformed
         // TODO add your handling code here:
-        String nivel=txt_NivelApariencia.getText();
-        String accionStr=txt_AccionPersonaje.getText();
-        String imagenStr=txt_NombreImagen.getText();
-        int personajeEscogido= combo_Personajes.getSelectedIndex();
-        String personajeEscogidoStr= combo_Personajes.getItemAt(personajeEscogido);
+        String nivel = txt_NivelApariencia.getText();
+        String accionStr = txt_AccionPersonaje.getText();
+        String imagenStr = txt_NombreImagen.getText();
+        int personajeEscogido = combo_Personajes.getSelectedIndex();
+        String personajeEscogidoStr = combo_Personajes.getItemAt(personajeEscogido);
         
         
         if(!nivel.isBlank() && !accionStr.isBlank() && !imagenStr.isBlank() && !personajeEscogidoStr.isBlank()){
-           for(int i=0;i<personajes.size();i++){
-               if(personajes.get(i).getcName()==personajeEscogidoStr.strip()){
-                   CharacterGame personajeCopia=personajes.get(i);
-                   Appearance nuevaApariencia=new Appearance();
-                   nuevaApariencia.addAppearance(accionStr,imageDir+imagenStr);
-                   personajes.get(i).setcAppearance(Integer.parseInt(nivel), nuevaApariencia);
-                   personajes.remove(i);
-                   personajes.add(personajeCopia);
-                   FileManager.writeObject(personajes,"src/main/java/CreacionPersonajes/Archivos/personajes.juego");
+           for(int i=0; i < personajes.size(); i++){
+               if(personajes.get(i).getcName() == personajeEscogidoStr.strip()){
+                   CharacterGame personajeCopia = personajes.get(i);
+                   Appearance nuevaApariencia = new Appearance();
+                   nuevaApariencia.addAppearance(accionStr, imageDir+imagenStr);
+                   personajes.get(i).setcAppearance( Integer.parseInt(nivel), nuevaApariencia);
+                   //personajes.remove(i);
+                   //personajes.add(personajeCopia);
                    
+                   FileManager.writeObject(presets, this.path+"personajes.juego");
                }
             }
+           
             JLabel imageLabel = new JLabel();
             ImageIcon imageicon = new ImageIcon(imageDir+txt_NombreImagen.getText());
             Image img = imageicon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
@@ -291,14 +296,14 @@ public class ingresarApariencia extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_IngresarActionPerformed
 
-    private void btn_GearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GearActionPerformed
+    private void btn_TerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TerminarActionPerformed
         // TODO add your handling code here:
-        ingresarGear frame = new ingresarGear();
+        inicioSesion_Juego frame = new inicioSesion_Juego();
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
-        frame.setLocation(290, 50);
+        frame.setLocation(290, 150);
         frame.setVisible(true);
-    }//GEN-LAST:event_btn_GearActionPerformed
+    }//GEN-LAST:event_btn_TerminarActionPerformed
 
     private void combo_PersonajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_PersonajesActionPerformed
         // TODO add your handling code here:
@@ -463,9 +468,9 @@ DefaultTableModel model;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Gear;
     private javax.swing.JButton btn_ImagenApariencia;
     private javax.swing.JButton btn_Ingresar;
+    private javax.swing.JButton btn_Terminar;
     private javax.swing.JComboBox<String> combo_Personajes;
     private javax.swing.JLabel fondo_Juego;
     private javax.swing.JScrollPane jScrollPane2;

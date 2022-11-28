@@ -12,4 +12,7 @@ public class Appearance {
     public String getAppearance(String key){
         return aAppearance.get(key.toUpperCase().strip());
     }
+    public HashMap<String, String> getAppearance2(){
+        return aAppearance;
+    }
 }
