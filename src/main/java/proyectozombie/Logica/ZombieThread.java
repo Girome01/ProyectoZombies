@@ -25,55 +25,50 @@ public class ZombieThread extends Thread implements Serializable{
     private boolean paused = false;
     public Zombie zombie;
     GameThread enemigo ;
-/*
-    public ZombieThread(campoBatalla_Juego refPantalla, JLabel refLabel, int numero, CharacterGame guerrero) {
+
+    public ZombieThread(campoBatalla_Juego refPantalla, JLabel refLabel, int numero, Zombie zombie) {
         this.refPantalla = refPantalla;
         this.refLabel = refLabel;
-        this.refArma = refArma;
         this.numero = numero;
-        this.guerrero = guerrero;
+        this.zombie = zombie;
     }
 
      public void run(){
         
         while(running){            
             try {
-                if (this.guerrero.getcLife() > 0){
+                if (this.zombie.getcLife() > 0){
                     // Si se agrega el tipo de guerre en la clase cambiar los if
-                    //if(this.guerrero.tipoGuerrero.equalsIgnoreCase("Guerrero aéreo"){
-                    if(this.guerrero.getcName().equalsIgnoreCase("Guerrero aéreo")){
+                    //if(this.zombie.tipozombie.equalsIgnoreCase("zombie aéreo"){
+                    if(this.zombie.getcName().equalsIgnoreCase("zombie aéreo")){
                       
                     }else{
                         
-                        String url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
+                        String url = zombie.getcAppearance(zombie.getcLevel(),"WALKING");
                         if(url != null){
                             cambiarImagen(url, refLabel);
                         }
                         sleep(1000);
-                        refPantalla.moveLabel(refLabel, refArma);
-                        url = guerrero.getcAppearance(guerrero.getcLevel(),"STOP");
+                        refPantalla.moveLabel(refLabel);
+                        url = zombie.getcAppearance(zombie.getcLevel(),"STOP");
                         if(url != null){
                             cambiarImagen(url, refLabel);
                         }
                     }
                     enemigo = refPantalla.batalla.getEnemy(this);
-                    refPantalla.escribirHilos("Soy "+this.guerrero.getcName()+" y lucho por mi bando con vida "+this.guerrero.getcLife()+" y ataque "+this.guerrero.getcHitPS());
+                    refPantalla.escribirHilos("Soy "+this.zombie.getcName()+" y lucho por mi bando con vida "+this.zombie.getcLife()+" y ataque "+this.zombie.getcHitPS());
                 }else{
                     enemigo = refPantalla.batalla.getGanador(this);
                     
-                    String imagen= guerrero.getcAppearance(0, "LAPIDA");
+                    String imagen= zombie.getcAppearance(0, "LAPIDA");
                     if(imagen != null)
                         cambiarImagen(imagen, refLabel);
                     
                 }
                 sleep(2000);
-            } catch (InterruptedException ex) { } catch (IOException ex) {
-                Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-            
-            
+            } catch (InterruptedException ex) { }
+
+
             while(paused){
                 try {
                     sleep(100);
@@ -99,5 +94,5 @@ public class ZombieThread extends Thread implements Serializable{
         refLabel.setIcon(new ImageIcon(img));
         refLabel.setSize(ancho, alto);
         refLabel.setOpaque(false);
-    }*/
+    }
 }

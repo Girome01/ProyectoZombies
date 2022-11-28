@@ -32,6 +32,14 @@ public class GameThread extends Thread implements Serializable{
         this.guerrero = guerrero;
     }
 
+    public GameThread(campoBatalla_Juego refPantalla, JLabel refLabel, int numero, CharacterGame guerrero) {
+        this.refPantalla = refPantalla;
+        this.refLabel = refLabel;
+        this.numero = numero;
+        this.guerrero = guerrero;
+    }
+
+
      public void run(){
         
         while(running){            
@@ -65,13 +73,9 @@ public class GameThread extends Thread implements Serializable{
                     
                 }
                 sleep(2000);
-            } catch (InterruptedException ex) { } catch (IOException ex) {
-                Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-            
-            
+            } catch (InterruptedException ex) { }
+
+
             while(paused){
                 try {
                     sleep(100);
