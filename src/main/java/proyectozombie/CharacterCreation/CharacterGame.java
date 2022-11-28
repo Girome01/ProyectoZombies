@@ -1,13 +1,7 @@
 package proyectozombie.CharacterCreation;
 
-import proyectozombie.Logica.GameThread;
-import proyectozombie.Logica.ZombieThread;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static java.lang.Math.abs;
-
 
 public class CharacterGame implements iPrototype {
     protected String cName;

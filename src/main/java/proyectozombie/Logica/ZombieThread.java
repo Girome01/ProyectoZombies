@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.GameEnviroment.Zombies.Zombie;
-import proyectozombie.Interfaz.campoBatalla_Juego;
+import proyectozombie.interfaz.campoBatalla_Juego;
 
 /**
  *

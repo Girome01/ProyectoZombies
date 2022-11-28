@@ -5,16 +5,8 @@
  */
 package proyectozombie.interfaz;
 
-import CreacionPersonajes.Logica.Appearance;
-import CreacionPersonajes.Logica.CharacterGame;
-import CreacionPersonajes.Logica.Gear;
-import LogicaJuego.HalfRangeWarrior;
-import Juego.LogicaJuego.User;
-import java.util.ArrayList;
-import java.util.HashMap;
+import proyectozombie.Users.User;
 import javax.swing.SwingUtilities;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
 /**
  *
  * @author monic

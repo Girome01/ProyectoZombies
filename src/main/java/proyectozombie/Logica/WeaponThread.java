@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.GameEnviroment.Weapons.Weapon;
-import proyectozombie.Interfaz.campoBatalla_Juego;
+import proyectozombie.interfaz.campoBatalla_Juego;
 
 /**
  *
@@ -19,17 +19,18 @@ import proyectozombie.Interfaz.campoBatalla_Juego;
 public class WeaponThread extends Thread implements Serializable{
     private campoBatalla_Juego refPantalla;
     public JLabel refLabel;
-    public JLabel refArma;
     int numero;
     private boolean running = true;
     private boolean paused = false;
     public Weapon weapon;
     GameThread enemigo ;
+    public CharacterGame guerrero;
+
+
 
     public WeaponThread(campoBatalla_Juego refPantalla, JLabel refLabel, int numero, CharacterGame guerrero) {
         this.refPantalla = refPantalla;
         this.refLabel = refLabel;
-        this.refArma = refArma;
         this.numero = numero;
         this.guerrero = guerrero;
     }

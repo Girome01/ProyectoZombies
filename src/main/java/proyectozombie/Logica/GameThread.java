@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.CharacterGame;
-import proyectozombie.Interfaz.campoBatalla_Juego;
+import proyectozombie.interfaz.campoBatalla_Juego;
 
 /**
  *
@@ -32,6 +32,15 @@ public class GameThread extends Thread implements Serializable{
         this.numero = numero;
         this.guerrero = guerrero;
     }
+
+    public GameThread(campoBatalla_Juego refPantalla, JLabel refLabel, int numero, CharacterGame guerrero) {
+        this.refPantalla = refPantalla;
+        this.refLabel = refLabel;
+        this.numero = numero;
+        this.guerrero = guerrero;
+    }
+
+
 
      public void run(){
         
@@ -66,13 +75,9 @@ public class GameThread extends Thread implements Serializable{
                     
                 }
                 sleep(2000);
-            } catch (InterruptedException ex) { } catch (IOException ex) {
-                Logger.getLogger(GameThread.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-            
-            
+            } catch (InterruptedException ex) { }
+
+
             while(paused){
                 try {
                     sleep(100);
