@@ -70,7 +70,6 @@ public class ingresarApariencia extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         table_Apariencias = new javax.swing.JTable();
         lbl_Usuario1 = new javax.swing.JLabel();
-        fondo_Juego = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingresar apariencia");
@@ -206,8 +205,6 @@ public class ingresarApariencia extends javax.swing.JFrame {
         lbl_Usuario1.setOpaque(true);
         panel_Fondo.add(lbl_Usuario1);
         lbl_Usuario1.setBounds(70, 70, 140, 30);
-        panel_Fondo.add(fondo_Juego);
-        fondo_Juego.setBounds(0, -20, 790, 520);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -472,7 +469,6 @@ DefaultTableModel model;
     private javax.swing.JButton btn_Ingresar;
     private javax.swing.JButton btn_Terminar;
     private javax.swing.JComboBox<String> combo_Personajes;
-    private javax.swing.JLabel fondo_Juego;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_AccionPersonaje;
     private javax.swing.JLabel lbl_ImagenApariencia;

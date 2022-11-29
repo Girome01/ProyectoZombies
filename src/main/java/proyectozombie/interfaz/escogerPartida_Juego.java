@@ -47,7 +47,6 @@ public class escogerPartida_Juego extends javax.swing.JFrame {
         lbl_Instruccion = new javax.swing.JLabel();
         lbl_Titulo0 = new javax.swing.JLabel();
         btn_NuevaP = new javax.swing.JButton();
-        lbl_Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -124,10 +123,6 @@ public class escogerPartida_Juego extends javax.swing.JFrame {
         jPanel1.add(btn_NuevaP);
         btn_NuevaP.setBounds(430, 370, 270, 60);
 
-        lbl_Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/herenciaAlTrono/imagenes_Juego/fondo_Juego.jpg"))); // NOI18N
-        jPanel1.add(lbl_Fondo);
-        lbl_Fondo.setBounds(-250, -200, 0, 0);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,7 +188,6 @@ public class escogerPartida_Juego extends javax.swing.JFrame {
     private javax.swing.JButton btn_EscogidaP;
     private javax.swing.JButton btn_NuevaP;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lbl_Fondo;
     private javax.swing.JLabel lbl_Instruccion;
     private javax.swing.JLabel lbl_Titulo0;
     private javax.swing.JLabel lbl_rutaA;

@@ -155,7 +155,6 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
         table_Personajes = new javax.swing.JTable();
         btn_Escoger = new javax.swing.JButton();
         lbl_userLevel = new javax.swing.JLabel();
-        lbl_Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Escoger personajes para jugar");
@@ -213,8 +212,6 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
         lbl_userLevel.setOpaque(true);
         panel_Fondo.add(lbl_userLevel);
         lbl_userLevel.setBounds(580, 10, 160, 30);
-        panel_Fondo.add(lbl_Fondo);
-        lbl_Fondo.setBounds(-260, -150, 0, 600);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,7 +246,6 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Escoger;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_Fondo;
     private javax.swing.JLabel lbl_userLevel;
     private javax.swing.JPanel panel_Fondo;
     private javax.swing.JTable table_Personajes;
