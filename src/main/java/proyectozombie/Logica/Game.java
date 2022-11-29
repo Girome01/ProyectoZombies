@@ -3,8 +3,11 @@ package proyectozombie.Logica;
 import java.awt.Image;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.GameEnviroment.Zombies.AerialZombie;
+import proyectozombie.GameEnviroment.Zombies.Zombie;
 import proyectozombie.interfaz.campoBatalla_Juego;
 
 public class Game {
@@ -21,8 +24,51 @@ public class Game {
         this.enemies = new ArrayList();
     }
 
+    public ArrayList generateDefensas(){
+        AerialZombie =new AerialZombie();
+        Bombas bombad=new Bombas();
+        Canon canond=new Canon();
+        Mortero morterod=new Mortero();
+        Muro murod=new Muro();
+        for (int j=1; j<nuevo.getNivelUsuario();j++){
+            aereod.crecerNivel();
+            bombad.crecerNivel();
+            canond.crecerNivel();
+            morterod.crecerNivel();
+            murod.crecerNivel();
+        }
 
+        defensas = new ArrayList<Guerrero>();
+        defensas.add(aereod);
+        defensas.add(bombad);
+        defensas.add(canond);
+        defensas.add(morterod);
+        defensas.add(murod);
+        return defensas;
+
+    }
     public void generateEnemies() {
+        ArrayList<Zombie> defensas = generateDefensas();
+        CharacterGame enemigos=(CharacterGame) FileManager.readObject("C:\\Users\\monic\\OneDrive - Estudiantes ITCR\\Documentos\\NetBeansProjects\\proyecto_HerenciaALTrono\\src\\archivosSerializados\\personajes.juego");
+        subirNivelEnemy(enemigos);
+
+        int largo= ThreadLocalRandom.current().nextInt(1,enemigos.listaPersonajes.size() + 1);
+        for(int i = 0; i <=largo; i++) {
+            int indice= (int) (Math.random() *(Math.random() * (defensas.size()-1)+1));
+            if(defensas.get(indice).lvlAparicion<=nuevo.nivelUsuario){
+                String nombreArchivoE=defensas.get(indice).rutaImagenE;
+                JLabel labelForThread = refPantalla.generateLabel(nombreArchivoE, 580,330);
+                enemies.add(new HiloBatalla(refPantalla, labelForThread, (i+1), defensas.get(indice)));
+            }
+        }
+        for(int i = 0; i <=largo; i++) {
+            int indice= (int) (Math.random() *(Math.random() * (enemigos.listaPersonajes.size()-1)+1));
+            if(enemigos.listaPersonajes.get(indice).lvlAparicion<=nuevo.nivelUsuario){
+                String nombreArchivoE=enemigos.listaPersonajes.get(indice).rutaImagenE;
+                JLabel labelForThread = refPantalla.generateLabel(nombreArchivoE, 580,330);
+                enemies.add(new HiloBatalla(refPantalla, labelForThread, (i+1), enemigos.listaPersonajes.get(indice)));
+            }
+        }
     }
 
     public void generateDefense() {

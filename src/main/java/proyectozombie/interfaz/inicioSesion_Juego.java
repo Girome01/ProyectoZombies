@@ -135,9 +135,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         panel_Fondo.add(lbl_Titulo2);
         lbl_Titulo2.setBounds(200, 270, 500, 30);
 
-        fondo_Juego.setIcon(new javax.swing.ImageIcon(path+ "\\img\\fondo_Juego.jpg")); // NOI18N
-        panel_Fondo.add(fondo_Juego);
-        fondo_Juego.setBounds(-260, -140, 1570, 675);
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
