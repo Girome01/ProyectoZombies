@@ -5,6 +5,9 @@
 
 package proyectozombie;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import proyectozombie.interfaz.inicioSesion_Juego;
+
 /**
  *
  * @author Usuario
@@ -12,6 +15,10 @@ package proyectozombie;
 public class ProyectoZombie {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        inicioSesion_Juego frame = new inicioSesion_Juego();
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocation(290, 150);
+        frame.setVisible(true);
     }
 }

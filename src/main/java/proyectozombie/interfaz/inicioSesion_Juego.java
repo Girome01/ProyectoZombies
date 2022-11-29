@@ -25,9 +25,12 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
      */
     public inicioSesion_Juego() {
         listaUsuarios = new UserDataBase();
+        AdminUser admin = new AdminUser("ADMIN", 0, "ADMIN");
+        listaUsuarios.agregarUsuario(admin);
+        FileManager.writeObject(listaUsuarios, path+"\\ArchivosSerializados\\usuarios.juego");
         Object valor=(UserDataBase) FileManager.readObject(path+"\\ArchivosSerializados\\usuarios.juego");
         if(valor != null){
-            listaUsuarios = (UserDataBase) valor;
+            listaUsuarios = (UserDataBase) FileManager.readObject(path+"\\ArchivosSerializados\\usuarios.juego");
         }  
         System.out.println(listaUsuarios.getListaUsuarios().size());
         initComponents();
@@ -51,7 +54,6 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         btn_Ingresar = new javax.swing.JButton();
         txt_Contrasenna = new javax.swing.JPasswordField();
         lbl_Titulo2 = new javax.swing.JLabel();
-        fondo_Juego = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -256,7 +258,6 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Ingresar;
-    private javax.swing.JLabel fondo_Juego;
     private javax.swing.JLabel lbl_Contrasenna;
     private javax.swing.JLabel lbl_Titulo0;
     private javax.swing.JLabel lbl_Titulo1;
