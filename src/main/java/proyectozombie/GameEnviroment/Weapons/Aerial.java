@@ -1,5 +1,6 @@
 package proyectozombie.GameEnviroment.Weapons;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import proyectozombie.CharacterCreation.Appearance;
 import proyectozombie.Logica.GameThread;
@@ -7,7 +8,7 @@ import proyectozombie.Logica.ZombieThread;
 
 import static java.lang.Math.abs;
 
-public class Aerial extends Weapon{
+public class Aerial extends Weapon implements Serializable{
 
     public Aerial(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife, int cStorageSpace, double cCost, int cLevel, int camina) {
         super(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel, camina);

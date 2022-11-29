@@ -1,8 +1,9 @@
 package proyectozombie.CharacterCreation;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Appearance {
+public class Appearance implements Serializable{
     private HashMap<String, String> aAppearance = new HashMap<>();
 
 

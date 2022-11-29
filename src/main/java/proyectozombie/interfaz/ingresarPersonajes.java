@@ -36,9 +36,14 @@ public class ingresarPersonajes extends javax.swing.JFrame {
     public ingresarPersonajes() {
        initComponents();
        addTableHeader();
-       Object valor = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");   
+        System.out.println("A");
+       Object valor = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego"); 
+        System.out.println("B");
        if(valor!=null){
-            personajes = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");  
+           System.out.println("EXISTE ARCHIVO");
+           personajes = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");  
+           System.out.println("Weapons: "+personajes.getWeapon().size());
+           System.out.println("Zombies: "+personajes.getZombie().size());
        }else{
            personajes = new Presets();
        }
@@ -366,7 +371,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
             switch (guerreroEscogido) {
                 case 0:
                     ContactWeapon contactWeapon = (ContactWeapon) new ContactWeapon(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel, 0);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -385,7 +390,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 1:
                     MediumRange mediumRange = (MediumRange) new MediumRange(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel, 0);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -404,7 +409,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 2:
                     Aerial aerial = new Aerial(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 1);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel, 1);
                             /*CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -423,7 +428,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 3:
                     Impact impacto = (Impact) new Impact(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel, 0);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -442,7 +447,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 4:
                     MultiAttack multiAttack = (MultiAttack) new MultiAttack(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel, 0);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -461,7 +466,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 5:
                     Blocks block = (Blocks) new Blocks(nombre, 
-                            defaultAppearanceHM, nivel, 0, vida, campos, costo, nivel, 0);
+                            defaultAppearanceHM, aparicion, 0, vida, campos, costo, nivel, 0);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -480,7 +485,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 6:
                     ContactZombie contactZ = (ContactZombie) new ContactZombie(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -499,7 +504,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 7:
                     AerialZombie aerialZ = (AerialZombie) new AerialZombie(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -518,7 +523,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 8:
                     HalfRangeZombie halfRangeZ = (HalfRangeZombie) new HalfRangeZombie(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -537,7 +542,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     break;
                 case 9:
                     SmashZombie smashZ = (SmashZombie) new SmashZombie(nombre, 
-                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            defaultAppearanceHM, aparicion, ataque, vida, campos, costo, nivel);
                             /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
@@ -642,6 +647,7 @@ DefaultTableModel model;
         txt_Rango.setText("");
         txt_Ataque.setText("");
         txt_Nivel.setText("");
+        txt_Rango.setText("");
         combo_Tipos.setSelectedIndex(-1);
     }
     /**

@@ -1,5 +1,6 @@
 package proyectozombie.GameEnviroment.Weapons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ import proyectozombie.Logica.ZombieThread;
 
 import static java.lang.Math.abs;
 
-public abstract class Weapon extends CharacterGame {
+public abstract class Weapon extends CharacterGame implements Serializable{
     private Log log;
     private int camina; // Si camina o no
 
