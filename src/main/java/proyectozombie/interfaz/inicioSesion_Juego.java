@@ -18,14 +18,18 @@ import proyectozombie.Logica.FileManager;
  */
 public class inicioSesion_Juego extends javax.swing.JFrame {
     protected UserDataBase listaUsuarios;
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     /**
      * Creates new form idk
      */
     public inicioSesion_Juego() {
         listaUsuarios = new UserDataBase();
-        Object valor=(UserDataBase) FileManager.readObject("C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\usuarios.juego");
+        AdminUser admin = new AdminUser("ADMIN", 0, "ADMIN");
+        listaUsuarios.agregarUsuario(admin);
+        FileManager.writeObject(listaUsuarios, path+"\\ArchivosSerializados\\usuarios.juego");
+        Object valor=(UserDataBase) FileManager.readObject(path+"\\ArchivosSerializados\\usuarios.juego");
         if(valor != null){
-            listaUsuarios = (UserDataBase) valor;
+            listaUsuarios = (UserDataBase) FileManager.readObject(path+"\\ArchivosSerializados\\usuarios.juego");
         }  
         System.out.println(listaUsuarios.getListaUsuarios().size());
         initComponents();
@@ -49,7 +53,6 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         btn_Ingresar = new javax.swing.JButton();
         txt_Contrasenna = new javax.swing.JPasswordField();
         lbl_Titulo2 = new javax.swing.JLabel();
-        fondo_Juego = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -131,10 +134,6 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         panel_Fondo.add(lbl_Titulo2);
         lbl_Titulo2.setBounds(200, 270, 500, 30);
 
-        fondo_Juego.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\fondo_Juego.jpg")); // NOI18N
-        panel_Fondo.add(fondo_Juego);
-        fondo_Juego.setBounds(-260, -140, 1570, 675);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +197,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
             }
         }
         listaUsuarios.agregarUsuario(nuevo);  
-        FileManager.writeObject(listaUsuarios, "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\usuarios.juego");   
+        FileManager.writeObject(listaUsuarios, path+"\\ArchivosSerializados\\usuarios.juego");   
         System.out.println("Nuevo Usuario: "+nuevo.getName());
         this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(nuevo);
@@ -254,7 +253,6 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Ingresar;
-    private javax.swing.JLabel fondo_Juego;
     private javax.swing.JLabel lbl_Contrasenna;
     private javax.swing.JLabel lbl_Titulo0;
     private javax.swing.JLabel lbl_Titulo1;
