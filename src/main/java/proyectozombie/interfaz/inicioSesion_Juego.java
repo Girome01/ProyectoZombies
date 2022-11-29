@@ -18,12 +18,14 @@ import proyectozombie.Logica.FileManager;
  */
 public class inicioSesion_Juego extends javax.swing.JFrame {
     protected UserDataBase listaUsuarios;
+    //private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     /**
      * Creates new form idk
      */
     public inicioSesion_Juego() {
         listaUsuarios = new UserDataBase();
-        Object valor=(UserDataBase) FileManager.readObject("C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\usuarios.juego");
+        Object valor=(UserDataBase) FileManager.readObject(path+"\\ArchivosSerializados\\usuarios.juego");
         if(valor != null){
             listaUsuarios = (UserDataBase) valor;
         }  
@@ -131,7 +133,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         panel_Fondo.add(lbl_Titulo2);
         lbl_Titulo2.setBounds(200, 270, 500, 30);
 
-        fondo_Juego.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\fondo_Juego.jpg")); // NOI18N
+        fondo_Juego.setIcon(new javax.swing.ImageIcon(path+ "\\img\\fondo_Juego.jpg")); // NOI18N
         panel_Fondo.add(fondo_Juego);
         fondo_Juego.setBounds(-260, -140, 1570, 675);
 
@@ -198,7 +200,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
             }
         }
         listaUsuarios.agregarUsuario(nuevo);  
-        FileManager.writeObject(listaUsuarios, "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\usuarios.juego");   
+        FileManager.writeObject(listaUsuarios, path+"\\ArchivosSerializados\\usuarios.juego");
         System.out.println("Nuevo Usuario: "+nuevo.getName());
         this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(nuevo);
