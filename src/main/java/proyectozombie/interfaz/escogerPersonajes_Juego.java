@@ -26,8 +26,7 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
     protected User usuario;
     Presets preset;
     
-    String imageDir = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\";
-    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     
     /**
      * Creates new form escogerPersonajes_Juego
@@ -37,9 +36,9 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
         initComponents();
         this.usuario = user;
         this.preset = new Presets();
-        Object valor = FileManager.readObject(path+"personajes.juego");
+        Object valor = FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");
         if(valor != null){
-            preset = (Presets) FileManager.readObject(path+"personajes.juego");
+            preset = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");
         }
         preset.agregarPFCharacter(characterFP);
         mostrarNivel();
