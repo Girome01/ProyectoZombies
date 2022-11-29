@@ -61,7 +61,7 @@
                           <Component id="btn_Pause" min="-2" pref="94" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="btn_Stop" min="-2" pref="105" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="406" max="32767" attributes="0"/>
                           <Component id="btn_Next" min="-2" pref="81" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -84,8 +84,8 @@
                           <Component id="btn_Pause" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                  <Component id="txtArea_hilos" min="-2" pref="109" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtArea_hilos" min="-2" pref="166" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

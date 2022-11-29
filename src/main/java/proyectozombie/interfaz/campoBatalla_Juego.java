@@ -29,7 +29,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
   
    public campoBatalla_Juego(ArrayList<CharacterGame> listaPersonajesUsuario, User usuario) {
        this.listaPersonajesUsuario = listaPersonajesUsuario;
-        //batalla = new Game(this,listaPersonajesUsuario);
+        batalla = new Game(this,listaPersonajesUsuario);
         this.usuario=usuario;
         initComponents();
     }
@@ -83,13 +83,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
                 if (x+23 <= 575) x = x+23; break;
             default: //derecha
                 if (x-23 >= 0) x = x-23; break; 
-        }
-        /*if (batalla.isAvailable(x, y)){
-            label.setLocation(x, y);
-            if(arma != null)
-                arma.setLocation(x+22, y);
-        }*/
-              
+        }        
     }
     
     
@@ -194,7 +188,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
                         .addComponent(btn_Pause, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(btn_Stop, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, Short.MAX_VALUE)
                         .addComponent(btn_Next, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(72, Short.MAX_VALUE))
             .addComponent(txtArea_hilos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -211,8 +205,8 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
                         .addComponent(btn_Stop, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_Next, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_Pause, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(67, 67, 67)
-                .addComponent(txtArea_hilos, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtArea_hilos, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -231,23 +225,23 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartActionPerformed
-        /*batalla.generateDefense();
+        batalla.generateDefense();
         batalla.generateEnemies();
         batalla.startArmy();
-        batalla.startEnemies();*/
+        batalla.startEnemies();
 
     }//GEN-LAST:event_btn_StartActionPerformed
 
     private void btn_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StopActionPerformed
-        //batalla.stopGame();
+        batalla.stopGame();
     }//GEN-LAST:event_btn_StopActionPerformed
 
     private void btn_PauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PauseActionPerformed
-        //batalla.pauseGame();
+        batalla.pauseGame();
     }//GEN-LAST:event_btn_PauseActionPerformed
 
     private void btn_NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NextActionPerformed
-        /*batalla.stopGame();
+        batalla.stopGame();
         JOptionPane.showMessageDialog(fondo_Juego,"Ganador: Aliados","Resultado de la batalla",JOptionPane.OK_OPTION);
         
         usuario.setLevel(usuario.getLevel()+1);
@@ -257,7 +251,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 150);
-        frame.setVisible(true);*/
+        frame.setVisible(true);
     }//GEN-LAST:event_btn_NextActionPerformed
                         
     /**

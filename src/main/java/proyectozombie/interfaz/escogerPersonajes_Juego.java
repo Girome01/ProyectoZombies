@@ -235,14 +235,14 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
         this.usuario.setWarriors(listaPersonajesUsuario);
         System.out.println(listaPersonajesUsuario);
         
-        /*this.setVisible(false);
+        this.setVisible(false);
 
 
-        seleccionarGear frame = new seleccionarGear(listaPersonajesUsuario, usuario);
+        asignarPosicion frame = new asignarPosicion(listaPersonajesUsuario, usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 50);
-        frame.setVisible(true);*/
+        frame.setVisible(true);
                 
     }//GEN-LAST:event_btn_EscogerActionPerformed
 
