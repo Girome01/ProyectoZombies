@@ -30,16 +30,15 @@ import proyectozombie.Logica.FileManager;
  */
 public class ingresarPersonajes extends javax.swing.JFrame {
     private Presets personajes;
-    private String imageDir = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\";
-    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     private ArrayList<CharacterGame> ingresados = new ArrayList();
     
     public ingresarPersonajes() {
        initComponents();
        addTableHeader();
-       Object valor = (Presets) FileManager.readObject(path+"personajes.juego");   
+       Object valor = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");   
        if(valor!=null){
-            personajes = (Presets) FileManager.readObject(path+"personajes.juego");  
+            personajes = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");  
        }else{
            personajes = new Presets();
        }
@@ -356,7 +355,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
             
             //Definir las apariencias default
             Appearance defaultAppearance = new Appearance();
-            defaultAppearance.addAppearance("lapida", imageDir+"lapida.png");
+            defaultAppearance.addAppearance("lapida", path+"\\img\\lapida.png");
             //defaultAppearance.addAppearance("STOP", imageDir+"rojoD.png");
             
             HashMap<Integer, Appearance> defaultAppearanceHM = new HashMap<>();
@@ -366,7 +365,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
             
             switch (guerreroEscogido) {
                 case 0:
-                    ContactWeapon contactWeapon = (ContactWeapon) new ContactWeapon.CharacterBuilder()
+                    ContactWeapon contactWeapon = (ContactWeapon) new ContactWeapon(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -374,7 +375,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
 
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     contactWeapon.cAddGear("Gear", gearItem);
@@ -383,7 +384,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(contactWeapon);
                     break;
                 case 1:
-                    MediumRange mediumRange = (MediumRange) new MediumRange.CharacterBuilder()
+                    MediumRange mediumRange = (MediumRange) new MediumRange(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -391,7 +394,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     mediumRange.cAddGear("Gear", gearItem);
@@ -400,7 +403,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(mediumRange);
                     break;
                 case 2:
-                    Aerial aerial = (Aerial) new Aerial.CharacterBuilder()
+                    Aerial aerial = new Aerial(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 1);
+                            /*CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -408,7 +413,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     aerial.cAddGear("Gear", gearItem);
@@ -417,7 +422,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(aerial);
                     break;
                 case 3:
-                    Impact impacto = (Impact) new Impact.CharacterBuilder()
+                    Impact impacto = (Impact) new Impact(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -425,7 +432,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     impacto.cAddGear("Gear", gearItem);
@@ -434,7 +441,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(impacto);
                     break;
                 case 4:
-                    MultiAttack multiAttack = (MultiAttack) new MultiAttack.CharacterBuilder()
+                    MultiAttack multiAttack = (MultiAttack) new MultiAttack(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel, 0);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -442,7 +451,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     multiAttack.cAddGear("Gear", gearItem);
@@ -451,7 +460,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(multiAttack);
                     break;
                 case 5:
-                    Blocks block = (Blocks) new Blocks.CharacterBuilder()
+                    Blocks block = (Blocks) new Blocks(nombre, 
+                            defaultAppearanceHM, nivel, 0, vida, campos, costo, nivel, 0);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -459,7 +470,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     block.cAddGear("Gear", gearItem);
@@ -468,7 +479,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(block);
                     break;
                 case 6:
-                    ContactZombie contactZ = (ContactZombie) new ContactZombie.CharacterBuilder()
+                    ContactZombie contactZ = (ContactZombie) new ContactZombie(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -476,7 +489,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     contactZ.cAddGear("Gear", gearItem);
@@ -485,7 +498,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(contactZ);
                     break;
                 case 7:
-                    AerialZombie aerialZ = (AerialZombie) new AerialZombie.CharacterBuilder()
+                    AerialZombie aerialZ = (AerialZombie) new AerialZombie(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -493,7 +508,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     aerialZ.cAddGear("Gear", gearItem);
@@ -502,7 +517,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(aerialZ);
                     break;
                 case 8:
-                    HalfRangeZombie halfRangeZ = (HalfRangeZombie) new HalfRangeZombie.CharacterBuilder()
+                    HalfRangeZombie halfRangeZ = (HalfRangeZombie) new HalfRangeZombie(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -510,7 +527,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     halfRangeZ.cAddGear("Gear", gearItem);
@@ -519,7 +536,9 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     ingresados.add(halfRangeZ);
                     break;
                 case 9:
-                    SmashZombie smashZ = (SmashZombie) new SmashZombie.CharacterBuilder()
+                    SmashZombie smashZ = (SmashZombie) new SmashZombie(nombre, 
+                            defaultAppearanceHM, nivel, ataque, vida, campos, costo, nivel);
+                            /*.CharacterBuilder()
                             .setcName(nombre)
                             .setcLife(vida)
                             .setcHitPS(ataque)
@@ -527,7 +546,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                             .setcStorageSpace(campos)
                             .setcSpawnLevel(nivel)
                             .setcAppearance(defaultAppearanceHM)
-                            .setcLevel(nivel).build();
+                            .setcLevel(nivel).build();*/
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     smashZ.cAddGear("Gear", gearItem);
@@ -539,7 +558,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(panel_Fondo,"Esa arma o zombie no es valido.","Atención",JOptionPane.WARNING_MESSAGE);
                     break;
             }
-            FileManager.writeObject(personajes, this.path+"personajes.juego");
+            FileManager.writeObject(personajes, this.path+"\\ArchivosSerializados\\personajes.juego");
          
             
             //JLabel imageLabel = new JLabel();

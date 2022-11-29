@@ -33,8 +33,7 @@ import proyectozombie.Logica.FileManager;
 public class ingresarApariencia extends javax.swing.JFrame {
     private ArrayList<CharacterGame> personajes;
     private Presets presets;
-    private String imageDir = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\";
-    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\ArchivosSerializados\\";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     
     public ingresarApariencia(ArrayList<CharacterGame> personajesAgregados, Presets presets) {
         initComponents();
@@ -247,7 +246,7 @@ public class ingresarApariencia extends javax.swing.JFrame {
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             txt_NombreImagen.setText(chooser.getSelectedFile().getName());
             File selectedImageFile = chooser.getSelectedFile();
-            String selectedImagePath = imageDir+selectedImageFile.getName();
+            String selectedImagePath = path+"\\img\\"+selectedImageFile.getName();
             JOptionPane.showMessageDialog(null, selectedImagePath);
             //Display image on jlable
             ImageIcon ii = new ImageIcon(selectedImagePath);
@@ -272,17 +271,17 @@ public class ingresarApariencia extends javax.swing.JFrame {
                if(personajes.get(i).getcName() == personajeEscogidoStr.strip()){
                    CharacterGame personajeCopia = personajes.get(i);
                    Appearance nuevaApariencia = new Appearance();
-                   nuevaApariencia.addAppearance(accionStr, imageDir+imagenStr);
+                   nuevaApariencia.addAppearance(accionStr, path+"\\img\\"+imagenStr);
                    personajes.get(i).setcAppearance( Integer.parseInt(nivel), nuevaApariencia);
                    //personajes.remove(i);
                    //personajes.add(personajeCopia);
                    
-                   FileManager.writeObject(presets, this.path+"personajes.juego");
+                   FileManager.writeObject(presets, this.path+"\\ArchivosSerializados\\personajes.juego");
                }
             }
            
             JLabel imageLabel = new JLabel();
-            ImageIcon imageicon = new ImageIcon(imageDir+txt_NombreImagen.getText());
+            ImageIcon imageicon = new ImageIcon(path+"\\img\\"+txt_NombreImagen.getText());
             Image img = imageicon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(img));
             model.addRow(new Object[]{personajeEscogidoStr, nivel, accionStr, imageLabel});
