@@ -38,7 +38,12 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
        this.listaPersonajesUsuario = listaPersonajesUsuario;
         batalla = new Game(this, listaPersonajesUsuario);
         this.usuario = usuario;
+        ImageIcon imageicon = new ImageIcon(path+"\\img\\fondoBatalla_1.png");
+        int ancho=imageicon.getIconWidth();
+        int alto=imageicon.getIconHeight();
+        Image img = imageicon.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         initComponents();
+        this.lbl_FondoBatalla.setIcon(new ImageIcon(img));
     }
    public void mostrarGanador(String ganador){
         JOptionPane.showMessageDialog(fondo_Juego,"Ganador: "+ganador,"Resultado de la batalla",JOptionPane.OK_OPTION);
@@ -158,8 +163,6 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         });
 
         panelEscenario.setBackground(new java.awt.Color(204, 204, 204));
-
-        lbl_FondoBatalla.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie\\img\\fondoBatalla_1.png")); // NOI18N
 
         javax.swing.GroupLayout panelEscenarioLayout = new javax.swing.GroupLayout(panelEscenario);
         panelEscenario.setLayout(panelEscenarioLayout);
@@ -291,7 +294,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
 
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
         // TODO add your handling code here:
-        DateFormat dateFormat = new SimpleDateFormat("d/MMM/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("d-MMM-yyyy HH:mm:ss");
         String date = dateFormat.format(new Date());
         System.out.println(date);
         System.out.println(path+"\\ArchivosSerializados\\Partidas\\"+date+".juego");
