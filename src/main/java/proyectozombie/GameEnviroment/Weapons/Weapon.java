@@ -34,11 +34,11 @@ public abstract class Weapon extends CharacterGame implements Serializable{
         return camina;
     }
 
-    public void attackAllInRange(ArrayList<ZombieThread> zombies, GameThread character) {
+    public void attackAllInRange(ArrayList<GameThread> zombies, GameThread character) {
         ArrayList<CharacterGame> onRange = new ArrayList<CharacterGame>();
-        for (ZombieThread zombie : zombies) {
+        for (GameThread zombie : zombies) {
             if (inRange(zombie, character)) {
-                onRange.add(zombie.zombie);
+                onRange.add(zombie.guerrero);
                 break;
             }
         }
@@ -50,7 +50,7 @@ public abstract class Weapon extends CharacterGame implements Serializable{
         }
     }
 
-    public Boolean inRange(ZombieThread zombie, GameThread character) {
+    public Boolean inRange(GameThread zombie, GameThread character) {
 
         int range = this.cShowGearList().get(0).getgRange();
 
@@ -61,7 +61,7 @@ public abstract class Weapon extends CharacterGame implements Serializable{
         int yCharacter = character.refLabel.getLocation().y;
 
         //override realizado en Aerial para ataque
-        if(zombie.zombie.getcName().equals("Zombie Aereo")) return false;
+        if(zombie.guerrero.getcName().equals("Zombie Aereo")) return false;
         return ((abs(xZombie - xCharacter) <= range) && (abs(yZombie - yCharacter) <= range));
     }
 }

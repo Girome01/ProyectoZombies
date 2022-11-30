@@ -44,23 +44,27 @@ public class GameThread extends Thread implements Serializable{
         while(running){            
             try {
                 if (this.guerrero.getcLife() > 0){
-                    // Si se agrega el tipo de guerre en la clase cambiar los if
-                    //if(this.guerrero.tipoGuerrero.equalsIgnoreCase("Guerrero aéreo"){
-                    if(this.guerrero.getcName().equalsIgnoreCase("Guerrero aéreo")){
-                      
-                    }else{
-                        
-                        String url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
-                        if(url != null){
-                            cambiarImagen(url, refLabel);
-                        }
-                        sleep(1000);
-                        refPantalla.moveLabel(refLabel);
-                        url = guerrero.getcAppearance(guerrero.getcLevel(),"STOP");
-                        if(url != null){
-                            cambiarImagen(url, refLabel);
-                        }
+                    
+                    //Verificar el tipo y ver si camina o no
+                    switch (guerrero.getTipo()) {
+                        case BLOCKS: case CONTACTWEAPON: case IMPACT: case MEDIUMRANGE: case MULTIATTACK:
+                             sleep(1000);
+                            break;
+                            
+                        default:
+                            String url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
+                            if(url != null){
+                                cambiarImagen(url, refLabel);
+                            }
+                            sleep(1000);
+                            refPantalla.moveLabel(refLabel);
+                            url = guerrero.getcAppearance(guerrero.getcLevel(),"STOP");
+                            if(url != null){
+                                cambiarImagen(url, refLabel);
+                            }
+                            break;
                     }
+                    
                     enemigo = refPantalla.batalla.getEnemy(this);
                     refPantalla.escribirHilos("Soy "+this.guerrero.getcName()+" y lucho por mi bando con vida "+this.guerrero.getcLife()+" y ataque "+this.guerrero.getcHitPS());
                 }else{

@@ -13,7 +13,6 @@ import static java.lang.Math.abs;
 
 public class Zombie extends CharacterGame implements Serializable{
     private Log log;
-    private String tipo;
 
     //TODO: inRangeDefense()
 
@@ -44,14 +43,6 @@ public class Zombie extends CharacterGame implements Serializable{
             this.setLog(zombie.zombie.getcName() + " ataco a " + onRange.get(0).getcName() + " en X:" +
                     zombie.refLabel.getLocation().x + " Y:" + zombie.refLabel.getLocation().y);
         }
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public Boolean inRange(GameThread character, ZombieThread zombie) {

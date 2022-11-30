@@ -3,6 +3,7 @@ package proyectozombie.CharacterCreation;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import proyectozombie.GameEnviroment.TypeCharacters;
 
 public class CharacterGame implements iPrototype, Serializable{
     protected String cName;
@@ -15,6 +16,7 @@ public class CharacterGame implements iPrototype, Serializable{
     protected double cCost;
     protected int cLevel;
     protected HashMap<String, Gear> cGear = new HashMap<>();
+    private TypeCharacters tipo;
 
     public CharacterGame(CharacterBuilder<?> builder) {
         this.cName = builder.cName;
@@ -47,6 +49,14 @@ public class CharacterGame implements iPrototype, Serializable{
     public void setPosition(int positionX, int positionY) {
         this.position[0] = positionX;
         this.position[1] = positionY;
+    }
+
+    public TypeCharacters getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TypeCharacters tipo) {
+        this.tipo = tipo;
     }
     
     public void cLevelUp() {
