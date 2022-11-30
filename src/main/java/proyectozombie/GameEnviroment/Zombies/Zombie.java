@@ -29,7 +29,7 @@ public class Zombie extends CharacterGame implements Serializable{
         log.writeLog(text);
     }
 
-    public void attackAllInRange(ArrayList<GameThread> characters, ZombieThread zombie) {
+    public void attackAllInRange(ArrayList<GameThread> characters, GameThread zombie) {
         ArrayList<CharacterGame> onRange = new ArrayList<>();
         for (GameThread character : characters) {
             if (inRange(character, zombie)) {
@@ -39,13 +39,13 @@ public class Zombie extends CharacterGame implements Serializable{
         }
         //override realizado en SmashZombie para autodestruccion y multiattack
         if (onRange.size() != 0) {
-            zombie.zombie.cAttack(onRange);
-            this.setLog(zombie.zombie.getcName() + " ataco a " + onRange.get(0).getcName() + " en X:" +
+            zombie.guerrero.cAttack(onRange);
+            this.setLog(zombie.guerrero.getcName() + " ataco a " + onRange.get(0).getcName() + " en X:" +
                     zombie.refLabel.getLocation().x + " Y:" + zombie.refLabel.getLocation().y);
         }
     }
 
-    public Boolean inRange(GameThread character, ZombieThread zombie) {
+    public Boolean inRange(GameThread character, GameThread zombie) {
 
         int range = this.cShowGearList().get(0).getgRange();
 

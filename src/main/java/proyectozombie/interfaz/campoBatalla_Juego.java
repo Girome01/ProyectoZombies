@@ -30,8 +30,8 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
     public ArrayList<CharacterGame> listaPersonajesUsuario;
     protected User usuario;
     
-    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
-    //private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    //private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
 
   
    public campoBatalla_Juego(ArrayList<CharacterGame> listaPersonajesUsuario, User usuario) {

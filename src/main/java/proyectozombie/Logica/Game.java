@@ -216,8 +216,8 @@ public class Game {
                     }
                 }
             }    
-            Weapon weapon = (Weapon) gameThread.guerrero;
-            weapon.attackAllInRange(enemies, gameThread);
+            Zombie zombie = (Zombie) gameThread.guerrero;
+            zombie.attackAllInRange(enemies, gameThread);
             return null;
         }
     }

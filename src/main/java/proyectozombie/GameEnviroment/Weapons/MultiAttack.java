@@ -18,12 +18,12 @@ public class MultiAttack extends Weapon implements Serializable{
     }
 
     @Override
-    public void attackAllInRange(ArrayList<ZombieThread> zombies, GameThread character) {
+    public void attackAllInRange(ArrayList<GameThread> zombies, GameThread character) {
         ArrayList<CharacterGame> onRange = new ArrayList<CharacterGame>();
-        for (ZombieThread zombie : zombies) {
+        for (GameThread zombie : zombies) {
             if (inRange(zombie, character)) {
-                onRange.add(zombie.zombie);
-                this.setLog(character.guerrero.getcName() + " ataco a " + zombie.zombie.getcName() + " en X:" +
+                onRange.add(zombie.guerrero);
+                this.setLog(character.guerrero.getcName() + " ataco a " + zombie.guerrero.getcName() + " en X:" +
                         character.refLabel.getLocation().x + " Y:" + character.refLabel.getLocation().y);
             }
         }

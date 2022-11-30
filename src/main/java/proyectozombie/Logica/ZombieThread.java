@@ -58,7 +58,7 @@ public class ZombieThread extends Thread implements Serializable{
                     //enemigo = refPantalla.batalla.getEnemy(this);
                     refPantalla.escribirHilos("Soy "+this.zombie.getcName()+" y lucho por mi bando con vida "+this.zombie.getcLife()+" y ataque "+this.zombie.getcHitPS());
                 }else{
-                    enemigo = refPantalla.batalla.getGanador(this);
+                    //enemigo = refPantalla.batalla.getGanador(this);
                     
                     String imagen= zombie.getcAppearance(0, "LAPIDA");
                     if(imagen != null)

@@ -58,7 +58,7 @@ public class WeaponThread extends Thread implements Serializable{
                     //enemigo = refPantalla.batalla.getEnemy(this);
                     refPantalla.escribirHilos("Soy "+this.guerrero.getcName()+" y lucho por mi bando con vida "+this.guerrero.getcLife()+" y ataque "+this.guerrero.getcHitPS());
                 }else{
-                    enemigo = refPantalla.batalla.getGanador(this);
+                    //enemigo = refPantalla.batalla.getGanador(this);
                     
                     String imagen= guerrero.getcAppearance(0, "LAPIDA");
                     if(imagen != null)
@@ -68,8 +68,7 @@ public class WeaponThread extends Thread implements Serializable{
                 sleep(2000);
             } catch (InterruptedException ex) { }
             
-            
-            
+
             
             while(paused){
                 try {

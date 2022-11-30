@@ -18,7 +18,7 @@ public class AerialZombie extends Zombie implements Serializable{
     }
 
     @Override
-    public Boolean inRange(GameThread character, ZombieThread zombie) {
+    public Boolean inRange(GameThread character, GameThread zombie) {
 
         int range = this.cShowGearList().get(0).getgRange();
 

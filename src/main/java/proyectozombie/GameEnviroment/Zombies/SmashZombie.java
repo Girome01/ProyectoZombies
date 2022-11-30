@@ -18,19 +18,19 @@ public class SmashZombie extends Zombie implements Serializable{
     }
 
     @Override
-    public void attackAllInRange(ArrayList<GameThread> characters, ZombieThread zombie) {
+    public void attackAllInRange(ArrayList<GameThread> characters, GameThread zombie) {
         ArrayList<CharacterGame> onRange = new ArrayList<>();
         for (GameThread character : characters) {
             if (inRange(character, zombie)) {
                 onRange.add(character.guerrero);
-                this.setLog(zombie.zombie.getcName() + " ataco a " + character.guerrero.getcName() + " en X:" +
+                this.setLog(zombie.guerrero.getcName() + " ataco a " + character.guerrero.getcName() + " en X:" +
                         zombie.refLabel.getLocation().x + " Y:" + zombie.refLabel.getLocation().y);
             }
 
         }
         if (onRange.size() != 0) {
-            zombie.zombie.cAttack(onRange);
-            zombie.zombie.cDamage(zombie.zombie.getcLife());
+            zombie.guerrero.cAttack(onRange);
+            zombie.guerrero.cDamage(zombie.guerrero.getcLife());
         }
     }
     
