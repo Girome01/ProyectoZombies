@@ -17,6 +17,14 @@ public class User implements Serializable{
         this.campos = campos;
     }
 
+    public int getCampos() {
+        return campos;
+    }
+
+    public void setCampos(int campos) {
+        this.campos = campos;
+    }
+
     public String getName() {
         return name;
     }

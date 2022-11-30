@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import proyectozombie.CharacterCreation.CharacterGame;
-import proyectozombie.GameEnviroment.Zombies.AerialZombie;
-import proyectozombie.GameEnviroment.Zombies.Zombie;
+import proyectozombie.CharacterCreation.PFCharacter;
+import proyectozombie.GameEnviroment.Zombies.*;
+import proyectozombie.Users.User;
 import proyectozombie.interfaz.campoBatalla_Juego;
 
 public class Game {
@@ -24,51 +25,23 @@ public class Game {
         this.enemies = new ArrayList();
     }
 
-    public ArrayList generateDefensas(){
-        AerialZombie =new AerialZombie();
-        Bombas bombad=new Bombas();
-        Canon canond=new Canon();
-        Mortero morterod=new Mortero();
-        Muro murod=new Muro();
-        for (int j=1; j<nuevo.getNivelUsuario();j++){
-            aereod.crecerNivel();
-            bombad.crecerNivel();
-            canond.crecerNivel();
-            morterod.crecerNivel();
-            murod.crecerNivel();
-        }
+    public void generateEnemies(ArrayList<Zombie> zombies, User usuario) {
+        int cantidad = usuario.getCampos() - 5;
+        ArrayList<Zombie> enemies = new ArrayList<>();
 
-        defensas = new ArrayList<Guerrero>();
-        defensas.add(aereod);
-        defensas.add(bombad);
-        defensas.add(canond);
-        defensas.add(morterod);
-        defensas.add(murod);
-        return defensas;
-
-    }
-    public void generateEnemies() {
-        ArrayList<Zombie> defensas = generateDefensas();
-        CharacterGame enemigos=(CharacterGame) FileManager.readObject("C:\\Users\\monic\\OneDrive - Estudiantes ITCR\\Documentos\\NetBeansProjects\\proyecto_HerenciaALTrono\\src\\archivosSerializados\\personajes.juego");
-        subirNivelEnemy(enemigos);
-
-        int largo= ThreadLocalRandom.current().nextInt(1,enemigos.listaPersonajes.size() + 1);
-        for(int i = 0; i <=largo; i++) {
-            int indice= (int) (Math.random() *(Math.random() * (defensas.size()-1)+1));
-            if(defensas.get(indice).lvlAparicion<=nuevo.nivelUsuario){
-                String nombreArchivoE=defensas.get(indice).rutaImagenE;
-                JLabel labelForThread = refPantalla.generateLabel(nombreArchivoE, 580,330);
-                enemies.add(new HiloBatalla(refPantalla, labelForThread, (i+1), defensas.get(indice)));
+        for (int i = 0; i < zombies.size(); i++) {
+            if (zombies.get(i).getcLevel() == usuario.getLevel()) {
+                enemies.add(zombies.get(i));
             }
         }
-        for(int i = 0; i <=largo; i++) {
-            int indice= (int) (Math.random() *(Math.random() * (enemigos.listaPersonajes.size()-1)+1));
-            if(enemigos.listaPersonajes.get(indice).lvlAparicion<=nuevo.nivelUsuario){
-                String nombreArchivoE=enemigos.listaPersonajes.get(indice).rutaImagenE;
-                JLabel labelForThread = refPantalla.generateLabel(nombreArchivoE, 580,330);
-                enemies.add(new HiloBatalla(refPantalla, labelForThread, (i+1), enemigos.listaPersonajes.get(indice)));
-            }
+        int i = 0;
+        while (cantidad > 0) {
+            if (i >= enemies.size()) i = 0;
+            listEnemies.add(PFCharacter.getPrototype(enemies.get(i).getcName(), 1).get(0));
+            cantidad--;
+            i++;
         }
+
     }
 
     public void generateDefense() {
@@ -162,7 +135,7 @@ public class Game {
         refLabel.setSize(ancho, alto);
         refLabel.setOpaque(false);
     }
-    
+
     public GameThread getGanador(Thread guerrero) {
         String ganador = "";
         boolean esArmy = this.defense.contains(guerrero);
