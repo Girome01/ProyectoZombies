@@ -8,15 +8,17 @@ import proyectozombie.Logica.ZombieThread;
 
 import static java.lang.Math.abs;
 import proyectozombie.CharacterCreation.iPrototype;
+import proyectozombie.GameEnviroment.TypeCharacters;
 
 public class Aerial extends Weapon implements Serializable{
 
     public Aerial(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife, int cStorageSpace, double cCost, int cLevel, int camina) {
         super(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel, camina);
+        this.setTipo(TypeCharacters.AERIAL);
     }
 
     @Override
-    public Boolean inRange(ZombieThread zombie, GameThread character) {
+    public Boolean inRange(GameThread zombie, GameThread character) {
 
         int range = this.cShowGearList().get(0).getgRange();
 

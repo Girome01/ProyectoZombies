@@ -11,12 +11,12 @@ package proyectozombie.GameEnviroment;
 public enum TypeCharacters {
     AERIAL,
     BLOCKS,
-    CANTACTWEAPON,
+    CONTACTWEAPON,
     IMPACT,
     MEDIUMRANGE,
     MULTIATTACK,
     AERIALZOMBIE,
-    CANTACTZOMBIE,
+    CONTACTZOMBIE,
     HALFRANGEZOMBIE,
     SMASHZOMBIE
 }

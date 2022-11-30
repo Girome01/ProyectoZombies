@@ -55,7 +55,7 @@ public class WeaponThread extends Thread implements Serializable{
                             cambiarImagen(url, refLabel);
                         }
                     }
-                    enemigo = refPantalla.batalla.getEnemy(this);
+                    //enemigo = refPantalla.batalla.getEnemy(this);
                     refPantalla.escribirHilos("Soy "+this.guerrero.getcName()+" y lucho por mi bando con vida "+this.guerrero.getcLife()+" y ataque "+this.guerrero.getcHitPS());
                 }else{
                     enemigo = refPantalla.batalla.getGanador(this);

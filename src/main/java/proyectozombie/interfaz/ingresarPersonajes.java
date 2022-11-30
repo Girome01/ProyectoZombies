@@ -36,9 +36,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
     public ingresarPersonajes() {
        initComponents();
        addTableHeader();
-        System.out.println("A");
        Object valor = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego"); 
-        System.out.println("B");
        if(valor!=null){
            System.out.println("EXISTE ARCHIVO");
            personajes = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");  

@@ -8,11 +8,13 @@ import proyectozombie.Logica.ZombieThread;
 
 import static java.lang.Math.abs;
 import proyectozombie.CharacterCreation.iPrototype;
+import proyectozombie.GameEnviroment.TypeCharacters;
 
 public class AerialZombie extends Zombie implements Serializable{
 
     public AerialZombie(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife, int cStorageSpace, double cCost, int cLevel) {
         super(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel);
+        this.setTipo(TypeCharacters.AERIALZOMBIE);
     }
 
     @Override

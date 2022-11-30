@@ -3,10 +3,9 @@ package proyectozombie.Logica;
 import java.awt.Image;
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
-
 import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.CharacterCreation.PFCharacter;
+import proyectozombie.GameEnviroment.Weapons.Weapon;
 import proyectozombie.GameEnviroment.Zombies.*;
 import proyectozombie.Users.User;
 import proyectozombie.interfaz.campoBatalla_Juego;
@@ -14,7 +13,7 @@ import proyectozombie.interfaz.campoBatalla_Juego;
 public class Game {
     private campoBatalla_Juego refPantalla;
     private ArrayList<GameThread> defense;
-    private ArrayList<ZombieThread> enemies;
+    private ArrayList<GameThread> enemies;
     protected ArrayList<CharacterGame> listDefense;
     protected ArrayList<CharacterGame> listEnemies;
 
@@ -38,10 +37,13 @@ public class Game {
         while (cantidad > 0) {
             if (i >= enemies.size()) i = 0;
             listEnemies.add(PFCharacter.getPrototype(enemies.get(i).getcName(), 1).get(0));
+            int y = (int)(Math.random()*24+1);
+            String nombreArchivo = listDefense.get(i).getcAppearance(listDefense.get(i).getcLevel(), "STOP");
+            JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, 1, y);
+            this.enemies.add(new GameThread(refPantalla, labelForThread, (i+1), listEnemies.get(i)));
             cantidad--;
             i++;
         }
-
     }
 
     public void generateDefense() {
@@ -111,7 +113,7 @@ public class Game {
 
         } else {
             for (int i = 0; i < enemies.size(); i++) {
-                if (enemies.get(i).zombie.getcLife() > 0)
+                if (enemies.get(i).guerrero.getcLife() > 0)
                     return null;
             }
             ganador = "Aliados";
@@ -122,8 +124,102 @@ public class Game {
     }
 
     //not sure TODO: review
-    public GameThread getEnemy(Thread gameThread) {
-        return null;
+    public GameThread getEnemy(GameThread gameThread) {
+        int cercano = 800;
+        int xGuerrero = gameThread.refLabel.getLocation().x;
+        int yGuerrero = gameThread.refLabel.getLocation().y;
+        int distanciax;
+        int distanciay;
+        int xEnemigo=0;
+        int yEnemigo=0;
+        int menor;
+        int num = 0;
+        String coordenada = "";
+        boolean esArmy = defense.contains(gameThread);
+         
+        if (esArmy){
+            for (int i = 0; i < enemies.size(); i++) {
+                if (xGuerrero > enemies.get(i).refLabel.getLocation().x) {
+                    distanciax = xGuerrero - enemies.get(i).refLabel.getLocation().x;}
+                else {
+                    distanciax = enemies.get(i).refLabel.getLocation().x - xGuerrero;
+                }
+                if (yGuerrero > enemies.get(i).refLabel.getLocation().y) {
+                    distanciay = yGuerrero - enemies.get(i).refLabel.getLocation().y;
+                }
+                else {
+                    distanciay = enemies.get(i).refLabel.getLocation().y - yGuerrero;
+                }
+                menor =  (int) Math.sqrt(Math.pow(distanciax, 2) + Math.pow(distanciay, 2));
+                if (menor < cercano){
+                    cercano = menor;
+                    xEnemigo=enemies.get(i).refLabel.getLocation().x;
+                    yEnemigo=enemies.get(i).refLabel.getLocation().y;
+                }
+                if (distanciax == 0)
+                    num = 30;
+                else if(distanciay ==0){
+                    num = 23;
+                }
+                else{
+                    num = (int) Math.sqrt(Math.pow(23, 2) + Math.pow(30, 2));
+                }
+            }
+            ArrayList<GameThread> enemy = new ArrayList<>();
+            for (int i = 0; i < enemies.size(); i++){
+                if (enemies.get(i).refLabel.getLocation().x == xEnemigo && enemies.get(i).refLabel.getLocation().y == yEnemigo ){
+                    if (enemies.get(i).guerrero.getcLife()> 0){
+                        enemy.add(enemies.get(i));
+                    }
+                }
+            }
+            Weapon weapon = (Weapon) gameThread.guerrero;
+            weapon.attackAllInRange(enemies, gameThread);
+            return null;
+        }
+        
+        else {
+            for (int i = 0; i < defense.size(); i++) {
+                if (xGuerrero > defense.get(i).refLabel.getLocation().x) {
+                    distanciax = xGuerrero - defense.get(i).refLabel.getLocation().x;
+                }
+                else {
+                    distanciax = defense.get(i).refLabel.getLocation().x - xGuerrero;
+                }
+                if (yGuerrero > defense.get(i).refLabel.getLocation().y) {
+                    distanciay = yGuerrero - defense.get(i).refLabel.getLocation().y;
+                }
+                else{
+                    distanciay = defense.get(i).refLabel.getLocation().y - yGuerrero;
+                }
+                menor =  (int) Math.sqrt(Math.pow(distanciax, 2) + Math.pow(distanciay, 2));
+                
+                if (menor < cercano) {
+                    cercano = menor;
+                    xEnemigo = defense.get(i).refLabel.getLocation().x;
+                    yEnemigo = defense.get(i).refLabel.getLocation().y;
+                }
+                if (distanciax == 0)
+                    num=30;
+                else if(distanciay ==0){
+                    num=23;
+                }
+                else{
+                    num = (int) Math.sqrt(Math.pow(23, 2) + Math.pow(30, 2));
+                }
+            }
+            ArrayList<GameThread> enemy = new ArrayList<>();
+            for (int i = 0; i < defense.size(); i++){
+                if (defense.get(i).refLabel.getLocation().x == xEnemigo && defense.get(i).refLabel.getLocation().y == yEnemigo ){
+                    if (defense.get(i).guerrero.getcLife()> 0){
+                        enemy.add(enemies.get(i));
+                    }
+                }
+            }    
+            Weapon weapon = (Weapon) gameThread.guerrero;
+            weapon.attackAllInRange(enemies, gameThread);
+            return null;
+        }
     }
 
     public void changeImage(String url, JLabel refLabel) {
@@ -149,7 +245,7 @@ public class Game {
 
         } else {
             for (int i = 0; i < enemies.size(); i++) {
-                if (enemies.get(i).zombie.getcLife() > 0 && !(enemies.get(i).zombie.getcName().equalsIgnoreCase("Defensa")))
+                if (enemies.get(i).guerrero.getcLife() > 0 && !(enemies.get(i).guerrero.getcName().equalsIgnoreCase("Defensa")))
                     return null;
             }
             ganador = "Aliados";
