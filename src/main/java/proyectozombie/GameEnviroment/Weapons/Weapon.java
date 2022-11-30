@@ -26,6 +26,10 @@ public abstract class Weapon extends CharacterGame implements Serializable{
         return log;
     }
 
+    public void setLog(String text){
+        log.writeLog(text);
+    }
+
     public int getCamina() {
         return camina;
     }
@@ -35,11 +39,14 @@ public abstract class Weapon extends CharacterGame implements Serializable{
         for (ZombieThread zombie : zombies) {
             if (inRange(zombie, character)) {
                 onRange.add(zombie.zombie);
+                break;
             }
         }
-        //override realizado en Impact para autodestruccion
+        //override realizado en Impact para autodestruccion y multiattack para varios enemigos
         if (onRange.size() != 0) {
             character.guerrero.cAttack(onRange);
+            this.setLog(character.guerrero.getcName() + " ataco a " + onRange.get(0).getcName() + " en X:" +
+                    character.refLabel.getLocation().x + " Y:" + character.refLabel.getLocation().y);
         }
     }
 

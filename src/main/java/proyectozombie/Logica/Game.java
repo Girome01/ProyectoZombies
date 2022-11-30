@@ -136,7 +136,7 @@ public class Game {
         refLabel.setOpaque(false);
     }
 
-    public GameThread getGanador(Thread guerrero) {
+    public GameThread getGanador(GameThread guerrero) {
         String ganador = "";
         boolean esArmy = this.defense.contains(guerrero);
         if (esArmy) {

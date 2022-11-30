@@ -21,6 +21,8 @@ public class Impact extends Weapon implements Serializable{
         for (ZombieThread zombie : zombies) {
             if (inRange(zombie, character)) {
                 onRange.add(zombie.zombie);
+                this.setLog(character.guerrero.getcName() + " ataco a " + zombie.zombie.getcName() + " en X:" +
+                        character.refLabel.getLocation().x + " Y:" + character.refLabel.getLocation().y);
             }
         }
         if (onRange.size() != 0) {
