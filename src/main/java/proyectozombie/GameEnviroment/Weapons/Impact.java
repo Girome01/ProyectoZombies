@@ -1,13 +1,15 @@
 package proyectozombie.GameEnviroment.Weapons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import proyectozombie.CharacterCreation.Appearance;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.CharacterCreation.iPrototype;
 import proyectozombie.Logica.GameThread;
 import proyectozombie.Logica.ZombieThread;
 
-public class Impact extends Weapon{
+public class Impact extends Weapon implements Serializable{
 
     public Impact(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife, int cStorageSpace, double cCost, int cLevel, int camina) {
         super(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel, camina);
@@ -28,5 +30,10 @@ public class Impact extends Weapon{
         }
     }
 
-    
+    @Override
+    public iPrototype clone(){
+        Impact character = new Impact(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel, camina);
+        character.setcGear(cGear);
+        return character;
+    }
 }

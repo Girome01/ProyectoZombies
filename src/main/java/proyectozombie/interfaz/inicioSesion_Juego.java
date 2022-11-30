@@ -186,12 +186,12 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
                     
                     nuevo = lista.get(i);
                     System.out.println("User: "+nuevo.getName());
-                    /*this.setVisible(false);
+                    this.setVisible(false);
                     escogerPartida_Juego frame = new escogerPartida_Juego(nuevo);
                     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
                     frame.pack();
                     frame.setLocation(290, 150);
-                    frame.setVisible(true);*/
+                    frame.setVisible(true);
                     return;
                 }
             

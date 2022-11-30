@@ -1,6 +1,8 @@
 package proyectozombie.CharacterCreation;
 
-public class Gear implements iPrototype{
+import java.io.Serializable;
+
+public class Gear implements iPrototype, Serializable{
     private String gName;
     private int gRange;
     private int gDamage;

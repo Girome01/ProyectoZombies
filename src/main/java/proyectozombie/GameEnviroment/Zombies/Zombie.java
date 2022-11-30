@@ -1,4 +1,5 @@
 package proyectozombie.GameEnviroment.Zombies;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import proyectozombie.CharacterCreation.Appearance;
@@ -10,7 +11,7 @@ import proyectozombie.Logica.ZombieThread;
 import static java.lang.Math.abs;
 
 
-public class Zombie extends CharacterGame{
+public class Zombie extends CharacterGame implements Serializable{
     private Log log;
     private String tipo;
 

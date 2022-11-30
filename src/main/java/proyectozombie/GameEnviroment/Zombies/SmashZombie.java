@@ -1,13 +1,15 @@
 package proyectozombie.GameEnviroment.Zombies;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import proyectozombie.CharacterCreation.Appearance;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.CharacterCreation.iPrototype;
 import proyectozombie.Logica.GameThread;
 import proyectozombie.Logica.ZombieThread;
 
-public class SmashZombie extends Zombie{
+public class SmashZombie extends Zombie implements Serializable{
 
     public SmashZombie(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife, int cStorageSpace, double cCost, int cLevel) {
         super(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel);
@@ -27,6 +29,13 @@ public class SmashZombie extends Zombie{
             zombie.zombie.cAttack(onRange);
             zombie.zombie.cDamage(zombie.zombie.getcLife());
         }
+    }
+    
+    @Override
+    public iPrototype clone(){
+        SmashZombie character = new SmashZombie(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel);
+        character.setcGear(cGear);
+        return character;
     }
     
 }

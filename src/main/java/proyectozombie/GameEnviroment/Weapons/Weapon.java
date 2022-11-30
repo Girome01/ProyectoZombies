@@ -1,5 +1,6 @@
 package proyectozombie.GameEnviroment.Weapons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,9 +12,9 @@ import proyectozombie.Logica.ZombieThread;
 
 import static java.lang.Math.abs;
 
-public abstract class Weapon extends CharacterGame {
+public abstract class Weapon extends CharacterGame implements Serializable{
     private Log log;
-    private int camina; // Si camina o no
+    public int camina; // Si camina o no
 
     public Weapon(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife, int cStorageSpace, double cCost, int cLevel, int camina) {
         super(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel);

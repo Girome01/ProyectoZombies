@@ -1,6 +1,8 @@
 package proyectozombie.GameEnviroment;
 
-public class Log {
+import java.io.Serializable;
+
+public class Log implements Serializable{
     private String log;
 
     public void writeLog(String logContent){

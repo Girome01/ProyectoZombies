@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 import java.util.ArrayList;
 import proyectozombie.GameEnviroment.Presets;
+import proyectozombie.GameEnviroment.Weapons.Weapon;
 
 /**
  *
@@ -21,12 +22,12 @@ import proyectozombie.GameEnviroment.Presets;
  */
 public class escogerPersonajes_Juego extends javax.swing.JFrame {
     protected ArrayList<CharacterGame> listaPersonajesUsuario;
-    ArrayList<CharacterGame> personajes;
+    ArrayList<Weapon> personajes;
     PFCharacter characterFP = new PFCharacter();
     protected User usuario;
     Presets preset;
     
-    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     
     /**
      * Creates new form escogerPersonajes_Juego
@@ -41,6 +42,7 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
             preset = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego");
         }
         preset.agregarPFCharacter(characterFP);
+        personajes = preset.getWeapon();
         mostrarNivel();
         subirNivel(user);
         generarTabla();
@@ -69,13 +71,7 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
     }
     
     public void generarTabla(){
-       Object valor=(ArrayList<CharacterGame>) FileManager.readObject("src/main/java/CreacionPersonajes/Archivos/personajes.juego");   
-       if(valor!=null){
-            personajes=(ArrayList<CharacterGame>) FileManager.readObject("src/main/java/CreacionPersonajes/Archivos/personajes.juego");  
-       }else{
-           personajes=new ArrayList<>();
-       }
-       DefaultTableModel model;
+        DefaultTableModel model;
         model = (DefaultTableModel) table_Personajes.getModel();
         table_Personajes.getColumn("Imagen").setCellRenderer(new CellRenderer());
         for(int i=0;i<personajes.size();i++){
@@ -109,8 +105,7 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
          
     public boolean getValues(){
         listaPersonajesUsuario = new ArrayList<>();
-        
-        for(int i=0;i<table_Personajes.getModel().getRowCount();i++){
+        for(int i=0;i < table_Personajes.getModel().getRowCount();i++){
             if ((Boolean) table_Personajes.getModel().getValueAt(i,7)){
               String nombre=table_Personajes.getModel().getValueAt(i, 0).toString();
               System.out.println(nombre);
@@ -119,12 +114,15 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
               if(guerreros!=null){
                   for (int j = 0; j < guerreros.size(); j++) {
                       listaPersonajesUsuario.add((CharacterGame)guerreros.get(j).clone());
+                      Weapon weapon = (Weapon) listaPersonajesUsuario.get(0);
+                      System.out.println(weapon.getCamina());
                   }
                   
                   //Comprobar si las campos son correctos, campos referente a la cantidad de espacios que tiene el usuario
                   //disponible para poder crear tropas.
                   this.usuario.agregarColeccion(listaPersonajesUsuario);
                   if(!this.usuario.sumatoriaCampos()){ //nuevo da error
+                      System.out.println("Suma campos: "+this.usuario.sumatoriaCampos());
                       return false;
                   }
               }
@@ -227,19 +225,19 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_EscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EscogerActionPerformed
-        getValues();
-        this.usuario.setWarriors(listaPersonajesUsuario);
-        System.out.println(listaPersonajesUsuario);
-        
-        this.setVisible(false);
+        if(getValues()){
+            this.usuario.setWarriors(listaPersonajesUsuario);
+            System.out.println(listaPersonajesUsuario);
 
-
-        asignarPosicion frame = new asignarPosicion(listaPersonajesUsuario, usuario);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocation(290, 50);
-        frame.setVisible(true);
-                
+            this.setVisible(false);
+            asignarPosicion frame = new asignarPosicion(listaPersonajesUsuario, usuario);
+            frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            frame.pack();
+            frame.setLocation(290, 50);
+            frame.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(panel_Fondo,"Paso el numero de campos disponibles. Numero de campos disponibles = "+this.usuario.getCampos(),"Error en datos ingresados.",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btn_EscogerActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

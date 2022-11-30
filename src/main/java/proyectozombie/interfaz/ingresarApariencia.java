@@ -33,7 +33,7 @@ import proyectozombie.Logica.FileManager;
 public class ingresarApariencia extends javax.swing.JFrame {
     private ArrayList<CharacterGame> personajes;
     private Presets presets;
-    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     
     public ingresarApariencia(ArrayList<CharacterGame> personajesAgregados, Presets presets) {
         initComponents();
@@ -294,6 +294,7 @@ public class ingresarApariencia extends javax.swing.JFrame {
 
     private void btn_TerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TerminarActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
         inicioSesion_Juego frame = new inicioSesion_Juego();
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();

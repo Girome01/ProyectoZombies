@@ -1,9 +1,10 @@
 package proyectozombie.CharacterCreation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CharacterGame implements iPrototype {
+public class CharacterGame implements iPrototype, Serializable{
     protected String cName;
     protected HashMap<Integer, Appearance> cAppearance;
     protected int cSpawnLevel;
@@ -24,11 +25,10 @@ public class CharacterGame implements iPrototype {
         this.cStorageSpace = builder.cStorageSpace;
         this.cCost = builder.cCost;
         this.cLevel = builder.cLevel;
-        this.position = new int[2];
     }
 
-    public CharacterGame(String cName, HashMap<Integer, Appearance> cAppearance, int cSpawnLevel, int cHitPS, int cLife,
-                         int cStorageSpace, double cCost, int cLevel) {
+    public CharacterGame(String cName, HashMap<Integer, Appearance> cAppearance, 
+            int cSpawnLevel, int cHitPS, int cLife, int cStorageSpace, double cCost, int cLevel) {
         this.cName = cName;
         this.cAppearance = cAppearance;
         this.cSpawnLevel = cSpawnLevel;
@@ -37,6 +37,7 @@ public class CharacterGame implements iPrototype {
         this.cStorageSpace = cStorageSpace;
         this.cCost = cCost;
         this.cLevel = cLevel;
+        this.position = new int[2];
     }
 
     public int[] getPosition() {
