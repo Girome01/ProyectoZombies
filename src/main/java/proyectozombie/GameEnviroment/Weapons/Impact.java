@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import proyectozombie.CharacterCreation.Appearance;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.CharacterCreation.iPrototype;
 import proyectozombie.Logica.GameThread;
 import proyectozombie.Logica.ZombieThread;
 
@@ -29,5 +30,10 @@ public class Impact extends Weapon implements Serializable{
         }
     }
 
-    
+    @Override
+    public iPrototype clone(){
+        Impact character = new Impact(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel, camina);
+        character.setcGear(cGear);
+        return character;
+    }
 }

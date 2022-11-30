@@ -3,6 +3,7 @@ package proyectozombie.GameEnviroment.Weapons;
 import java.io.Serializable;
 import java.util.HashMap;
 import proyectozombie.CharacterCreation.Appearance;
+import proyectozombie.CharacterCreation.iPrototype;
 
 public class MultiAttack extends Weapon implements Serializable{
 
@@ -10,6 +11,11 @@ public class MultiAttack extends Weapon implements Serializable{
         super(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel, camina);
     }
 
-
+    @Override
+    public iPrototype clone(){
+        MultiAttack character = new MultiAttack(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel, camina);
+        character.setcGear(cGear);
+        return character;
+    }
     
 }

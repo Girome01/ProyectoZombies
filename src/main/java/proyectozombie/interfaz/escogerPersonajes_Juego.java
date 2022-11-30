@@ -114,6 +114,8 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
               if(guerreros!=null){
                   for (int j = 0; j < guerreros.size(); j++) {
                       listaPersonajesUsuario.add((CharacterGame)guerreros.get(j).clone());
+                      Weapon weapon = (Weapon) listaPersonajesUsuario.get(0);
+                      System.out.println(weapon.getCamina());
                   }
                   
                   //Comprobar si las campos son correctos, campos referente a la cantidad de espacios que tiene el usuario

@@ -7,6 +7,7 @@ import proyectozombie.Logica.GameThread;
 import proyectozombie.Logica.ZombieThread;
 
 import static java.lang.Math.abs;
+import proyectozombie.CharacterCreation.iPrototype;
 
 public class AerialZombie extends Zombie implements Serializable{
 
@@ -26,6 +27,13 @@ public class AerialZombie extends Zombie implements Serializable{
         int yCharacter = character.refLabel.getLocation().y;
 
         return ((abs(xZombie - xCharacter) <= range) && (abs(yZombie - yCharacter) <= range));
+    }
+    
+    @Override
+    public iPrototype clone(){
+        AerialZombie character = new AerialZombie(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel);
+        character.setcGear(cGear);
+        return character;
     }
     
 }

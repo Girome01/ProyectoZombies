@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import proyectozombie.CharacterCreation.Appearance;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.CharacterCreation.iPrototype;
 import proyectozombie.Logica.GameThread;
 import proyectozombie.Logica.ZombieThread;
 
@@ -27,6 +28,13 @@ public class SmashZombie extends Zombie implements Serializable{
             zombie.zombie.cAttack(onRange);
             zombie.zombie.cDamage(zombie.zombie.getcLife());
         }
+    }
+    
+    @Override
+    public iPrototype clone(){
+        SmashZombie character = new SmashZombie(cName, cAppearance, cSpawnLevel, cHitPS, cLife, cStorageSpace, cCost, cLevel);
+        character.setcGear(cGear);
+        return character;
     }
     
 }
