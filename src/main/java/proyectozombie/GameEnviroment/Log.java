@@ -3,10 +3,10 @@ package proyectozombie.GameEnviroment;
 import java.io.Serializable;
 
 public class Log implements Serializable{
-    private String log;
+    private String log = "";
 
     public void writeLog(String logContent){
-        log += "---------------------------------";
+        log += "\n---------------------------------\n";
         log += logContent;
     }
     

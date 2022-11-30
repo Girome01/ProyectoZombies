@@ -52,12 +52,12 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
             usuario.subirLevel();
         }
         
-        this.setVisible(false);
+        /*this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 150);
-        frame.setVisible(true);
+        frame.setVisible(true);*/
     } 
    
     public JLabel generateLabel(String imagen, int xUser, int yUser){
@@ -85,7 +85,6 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         int direccion = (new Random()).nextInt(4);
         int x = label.getLocation().x;
         int y = label.getLocation().y;
-        
         switch(direccion){
             case 0: // arriba
                 if (y-30 >= 0) y = y-30; break;
@@ -95,7 +94,9 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
                 if (x+23 <= 575) x = x+23; break;
             default: //derecha
                 if (x-23 >= 0) x = x-23; break; 
-        }        
+        }   
+        if (batalla.isAvailable(x, y))
+            label.setLocation(x, y);
     }
     
     
@@ -263,7 +264,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         if(valor!=null){
            preset = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego"); 
         }
-        batalla.generateDefense();
+        batalla.generateDefense(usuario.getWarriors());
         batalla.generateEnemies(preset.getZombie(),usuario);
         batalla.startArmy();
         batalla.startEnemies();
@@ -282,14 +283,14 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         batalla.stopGame();
         JOptionPane.showMessageDialog(fondo_Juego,"Ganador: Aliados","Resultado de la batalla",JOptionPane.OK_OPTION);
         
-        usuario.setLevel(usuario.getLevel()+1);
+        usuario.subirLevel();
         
-        this.setVisible(false);
+        /*this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 150);
-        frame.setVisible(true);
+        frame.setVisible(true);*/
     }//GEN-LAST:event_btn_NextActionPerformed
 
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed

@@ -18,7 +18,7 @@ public class Aerial extends Weapon implements Serializable{
     }
 
     @Override
-    public Boolean inRange(GameThread zombie, GameThread character) {
+    public Boolean inRange(GameThread zombie, GameThread character, int num, int cercano) {
 
         int range = this.cShowGearList().get(0).getgRange();
 

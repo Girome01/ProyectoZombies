@@ -17,10 +17,10 @@ public class Impact extends Weapon implements Serializable{
     }
 
     @Override
-    public void attackAllInRange(ArrayList<GameThread> zombies, GameThread character) {
+    public void attackAllInRange(ArrayList<GameThread> zombies, GameThread character, int num, int cercano) {
         ArrayList<CharacterGame> onRange = new ArrayList<CharacterGame>();
         for (GameThread zombie : zombies) {
-            if (inRange(zombie, character)) {
+            if (inRange(zombie, character, num, cercano)) {
                 onRange.add(zombie.guerrero);
                 this.setLog(character.guerrero.getcName() + " ataco a " + zombie.guerrero.getcName() + " en X:" +
                         character.refLabel.getLocation().x + " Y:" + character.refLabel.getLocation().y);

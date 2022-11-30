@@ -22,23 +22,26 @@ public class Game {
         this.listDefense = personajes;
         this.defense = new ArrayList();
         this.enemies = new ArrayList();
+        this.listEnemies = new ArrayList();
+        this.listDefense = new ArrayList();
     }
 
     public void generateEnemies(ArrayList<Zombie> zombies, User usuario) {
-        int cantidad = usuario.getCampos() - 5;
+        int cantidad = usuario.getCampos(); //5-3=2
         ArrayList<Zombie> enemies = new ArrayList<>();
 
         for (int i = 0; i < zombies.size(); i++) {
-            if (zombies.get(i).getcLevel() == usuario.getLevel()) {
+            if (zombies.get(i).getcLevel() <= usuario.getLevel()) {
                 enemies.add(zombies.get(i));
             }
         }
+        
         int i = 0;
         while (cantidad > 0) {
             if (i >= enemies.size()) i = 0;
             listEnemies.add(PFCharacter.getPrototype(enemies.get(i).getcName(), 1).get(0));
             int y = (int)(Math.random()*24+1);
-            String nombreArchivo = listDefense.get(i).getcAppearance(listDefense.get(i).getcLevel(), "STOP");
+            String nombreArchivo = listEnemies.get(i).getcAppearance(1, "STOP");
             JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, 1, y);
             this.enemies.add(new GameThread(refPantalla, labelForThread, (i+1), listEnemies.get(i)));
             cantidad--;
@@ -46,9 +49,10 @@ public class Game {
         }
     }
 
-    public void generateDefense() {
+    public void generateDefense(ArrayList<CharacterGame> listaEsco) {
+        this.listDefense = listaEsco;
         for (int i = 0; i < listDefense.size(); i++) {
-            String nombreArchivo = listDefense.get(i).getcAppearance(listDefense.get(i).getcLevel(), "STOP");
+            String nombreArchivo = listDefense.get(i).getcAppearance(1, "STOP");
             int[] position = listDefense.get(i).getPosition();
             JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, position[0], position[1]);
             this.defense.add(new GameThread(refPantalla, labelForThread, (i + 1), listDefense.get(i)));
@@ -174,7 +178,7 @@ public class Game {
                 }
             }
             Weapon weapon = (Weapon) gameThread.guerrero;
-            weapon.attackAllInRange(enemies, gameThread);
+            weapon.attackAllInRange(enemy, gameThread, num, cercano);
             return null;
         }
         
@@ -212,12 +216,12 @@ public class Game {
             for (int i = 0; i < defense.size(); i++){
                 if (defense.get(i).refLabel.getLocation().x == xEnemigo && defense.get(i).refLabel.getLocation().y == yEnemigo ){
                     if (defense.get(i).guerrero.getcLife()> 0){
-                        enemy.add(enemies.get(i));
+                        enemy.add(defense.get(i));
                     }
                 }
             }    
             Zombie zombie = (Zombie) gameThread.guerrero;
-            zombie.attackAllInRange(enemies, gameThread);
+            zombie.attackAllInRange(enemy, gameThread);
             return null;
         }
     }

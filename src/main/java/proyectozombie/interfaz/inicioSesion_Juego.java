@@ -158,7 +158,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
         String usuario = txt_Usuario.getText().trim().toUpperCase();
         String contrasenna = String.valueOf(txt_Contrasenna.getPassword()).trim().toUpperCase();
         ArrayList<User> lista = listaUsuarios.getListaUsuarios();
-        User nuevo = new User(usuario,0,20); //nombre, lvl, campos
+        User nuevo = new User(usuario, 1, 5); //nombre, lvl, campos
         for (int i = 0; i < lista.size(); i++) {
             System.out.println("Hay usuarios");
             if(!usuario.isBlank()){

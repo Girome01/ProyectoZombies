@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.CharacterGame;
+import proyectozombie.GameEnviroment.Weapons.Weapon;
+import proyectozombie.GameEnviroment.Zombies.Zombie;
 import proyectozombie.interfaz.campoBatalla_Juego;
 
 /**
@@ -44,15 +46,33 @@ public class GameThread extends Thread implements Serializable{
         while(running){            
             try {
                 if (this.guerrero.getcLife() > 0){
-                    
+                    Weapon weapon = null;
+                    Zombie zombie = null;
+                    String url;
                     //Verificar el tipo y ver si camina o no
                     switch (guerrero.getTipo()) {
                         case BLOCKS: case CONTACTWEAPON: case IMPACT: case MEDIUMRANGE: case MULTIATTACK:
-                             sleep(1000);
+                            sleep(1000);
+                            weapon = (Weapon) this.guerrero;
                             break;
-                            
+                        case AERIALZOMBIE: case CONTACTZOMBIE: case HALFRANGEZOMBIE: case SMASHZOMBIE:
+                            zombie = (Zombie)this.guerrero;
+                            url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
+                            if(url != null){
+                                cambiarImagen(url, refLabel);
+                            }
+                            sleep(1000);
+                            refPantalla.moveLabel(refLabel);
+                            url = guerrero.getcAppearance(guerrero.getcLevel(),"STOP");
+                            if(url != null){
+                                cambiarImagen(url, refLabel);
+                            }
+                            break;
+                        case AERIAL: 
+                            weapon = (Weapon) this.guerrero;
                         default:
-                            String url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
+                            
+                            url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
                             if(url != null){
                                 cambiarImagen(url, refLabel);
                             }
@@ -66,7 +86,12 @@ public class GameThread extends Thread implements Serializable{
                     }
                     
                     enemigo = refPantalla.batalla.getEnemy(this);
-                    refPantalla.escribirHilos("Soy "+this.guerrero.getcName()+" y lucho por mi bando con vida "+this.guerrero.getcLife()+" y ataque "+this.guerrero.getcHitPS());
+                    if(weapon != null){
+                        refPantalla.escribirHilos(weapon.getLog().readLog());
+                    }else{
+                        refPantalla.escribirHilos(zombie.getLog().readLog());
+                    }
+                    //refPantalla.escribirHilos("Soy "+this.guerrero.getcName()+" y lucho por mi bando con vida "+this.guerrero.getcLife()+" y ataque "+this.guerrero.getcHitPS());
                 }else{
                     enemigo = refPantalla.batalla.getGanador(this);
                     
