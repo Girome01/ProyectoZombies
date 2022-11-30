@@ -33,8 +33,8 @@ import proyectozombie.Logica.FileManager;
 public class ingresarApariencia extends javax.swing.JFrame {
     private ArrayList<CharacterGame> personajes;
     private Presets presets;
-    //private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
-    private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    //private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     
     public ingresarApariencia(ArrayList<CharacterGame> personajesAgregados, Presets presets) {
         initComponents();
