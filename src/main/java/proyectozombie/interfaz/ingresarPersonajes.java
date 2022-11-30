@@ -384,6 +384,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     contactWeapon.cAddGear("Gear", gearItem);
                     
+                    contactWeapon.initLog();
                     personajes.addWeapon(contactWeapon);
                     ingresados.add(contactWeapon);
                     break;
@@ -403,6 +404,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     mediumRange.cAddGear("Gear", gearItem);
                     
+                    mediumRange.initLog();
                     personajes.addWeapon(mediumRange);
                     ingresados.add(mediumRange);
                     break;
@@ -421,7 +423,8 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     aerial.cAddGear("Gear", gearItem);
-                                    
+                               
+                    aerial.initLog();
                     personajes.addWeapon(aerial);
                     ingresados.add(aerial);
                     break;
@@ -441,6 +444,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     impacto.cAddGear("Gear", gearItem);
                     
+                    impacto.initLog();
                     personajes.addWeapon(impacto);
                     ingresados.add(impacto);
                     break;
@@ -460,6 +464,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     multiAttack.cAddGear("Gear", gearItem);
                     
+                    multiAttack.initLog();
                     personajes.addWeapon(multiAttack);
                     ingresados.add(multiAttack);
                     break;
@@ -479,6 +484,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     block.cAddGear("Gear", gearItem);
                     
+                    block.initLog();
                     personajes.addWeapon(block);
                     ingresados.add(block);
                     break;
@@ -498,6 +504,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     contactZ.cAddGear("Gear", gearItem);
                     
+                    contactZ.initLog();
                     personajes.addZombie(contactZ);
                     ingresados.add(contactZ);
                     break;
@@ -517,6 +524,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     aerialZ.cAddGear("Gear", gearItem);
                     
+                    aerialZ.initLog();
                     personajes.addZombie(aerialZ);
                     ingresados.add(aerialZ);
                     break;
@@ -536,6 +544,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     halfRangeZ.cAddGear("Gear", gearItem);
                     
+                    halfRangeZ.initLog();
                     personajes.addZombie(halfRangeZ);
                     ingresados.add(halfRangeZ);
                     break;
@@ -555,6 +564,7 @@ public class ingresarPersonajes extends javax.swing.JFrame {
                     gearItem = new Gear("Gear", rango, ataque, nivel, 1, null, true);
                     smashZ.cAddGear("Gear", gearItem);
                     
+                    smashZ.initLog();
                     personajes.addZombie(smashZ);
                     ingresados.add(smashZ);
                     break;

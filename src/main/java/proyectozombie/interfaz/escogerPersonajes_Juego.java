@@ -13,7 +13,12 @@ import java.awt.Image;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import proyectozombie.CharacterCreation.Appearance;
+import proyectozombie.CharacterCreation.Gear;
 import proyectozombie.GameEnviroment.Presets;
+import proyectozombie.GameEnviroment.TypeCharacters;
+import proyectozombie.GameEnviroment.Weapons.Blocks;
 import proyectozombie.GameEnviroment.Weapons.Weapon;
 
 /**
@@ -83,7 +88,7 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
             int ataque = personajes.get(i).getcHitPS();
             int campos = personajes.get(i).getcStorageSpace();
             double costo = personajes.get(i).getcCost();
-            String imageUrl=personajes.get(i).getcAppearance3(aparicion, "WALKING");
+            String imageUrl=personajes.get(i).getcAppearance3(1, "STOP");
             characterFP.addPrototype(nombre, personajes.get(i));
          
             JLabel imageLabel = new JLabel();
@@ -114,14 +119,15 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
               ArrayList<CharacterGame> guerreros = PFCharacter.getPrototype(nombre,cantidad);
               if(guerreros!=null){
                   for (int j = 0; j < guerreros.size(); j++) {
-                      listaPersonajesUsuario.add((CharacterGame)guerreros.get(j).clone());
+                      Weapon weapon = (Weapon) guerreros.get(j).clone();
+                      weapon.initLog();
+                      listaPersonajesUsuario.add((CharacterGame)weapon);
                   }
                   
                   //Comprobar si las campos son correctos, campos referente a la cantidad de espacios que tiene el usuario
                   //disponible para poder crear tropas.
                   this.usuario.agregarColeccion(listaPersonajesUsuario);
                   if(!this.usuario.sumatoriaCampos()){ //nuevo da error
-                      System.out.println("Suma campos: "+this.usuario.sumatoriaCampos());
                       return false;
                   }
               }
@@ -225,6 +231,21 @@ public class escogerPersonajes_Juego extends javax.swing.JFrame {
 
     private void btn_EscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EscogerActionPerformed
         if(getValues()){
+            
+            Appearance defaultAppearance = new Appearance();
+            defaultAppearance.addAppearance("lapida", path+"\\img\\lapida.png");
+            Appearance lvl1 = new Appearance();
+            lvl1.addAppearance("STOP", path+"\\img\\reliquia.png");
+            HashMap<Integer, Appearance> defaultAppearanceHM = new HashMap<>();
+            defaultAppearanceHM.put(0, defaultAppearance);
+            defaultAppearanceHM.put(1, lvl1);
+            Blocks reliquia = new Blocks("Reliquia",defaultAppearanceHM,1,0,5+(usuario.getLevel()*5),0,0,1,0);
+            reliquia.setTipo(TypeCharacters.RELIQUIA);
+            Gear gearItem = new Gear("Gear", 0, 0, 1, 1, null, true);
+            reliquia.cAddGear("Gear", gearItem);
+            
+            reliquia.initLog();
+            listaPersonajesUsuario.add(reliquia);
             this.usuario.setWarriors(listaPersonajesUsuario);
             System.out.println(listaPersonajesUsuario);
 

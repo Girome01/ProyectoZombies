@@ -5,7 +5,13 @@
  */
 package proyectozombie.interfaz;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import proyectozombie.Users.*;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -18,19 +24,20 @@ import proyectozombie.Logica.FileManager;
  */
 public class inicioSesion_Juego extends javax.swing.JFrame {
     protected UserDataBase listaUsuarios;
-    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno Software\\Proyecto 3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     //private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     /**
      * Creates new form idk
      */
     public inicioSesion_Juego() {
         listaUsuarios = new UserDataBase();
-        AdminUser admin = new AdminUser("ADMIN", 0, "ADMIN");
+        /*AdminUser admin = new AdminUser("ADMIN", 0, "ADMIN");
         listaUsuarios.agregarUsuario(admin);
-        FileManager.writeObject(listaUsuarios, path+"\\ArchivosSerializados\\usuarios.juego");
+        FileManager.writeObject(listaUsuarios, path+"\\ArchivosSerializados\\usuarios.juego");*/
         Object valor=(UserDataBase) FileManager.readObject(path+"\\ArchivosSerializados\\usuarios.juego");
         if(valor != null){
             listaUsuarios = (UserDataBase) FileManager.readObject(path+"\\ArchivosSerializados\\usuarios.juego");
+            System.out.println(path+"\\ArchivosSerializados\\usuarios.juego");
         }  
         System.out.println(listaUsuarios.getListaUsuarios().size());
         initComponents();
@@ -199,7 +206,7 @@ public class inicioSesion_Juego extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(panel_Fondo,"Los campos están vacíos.","Precaución guerrero",JOptionPane.WARNING_MESSAGE);
             }
         }
-        listaUsuarios.agregarUsuario(nuevo);  
+        listaUsuarios.agregarUsuario(nuevo);
         FileManager.writeObject(listaUsuarios, path+"\\ArchivosSerializados\\usuarios.juego");
         System.out.println("Nuevo Usuario: "+nuevo.getName());
         this.setVisible(false);

@@ -3,6 +3,7 @@ package proyectozombie.GameEnviroment.Weapons;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.Appearance;
 import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.CharacterCreation.iPrototype;
@@ -17,7 +18,7 @@ public class Impact extends Weapon implements Serializable{
     }
 
     @Override
-    public void attackAllInRange(ArrayList<GameThread> zombies, GameThread character, int num, int cercano) {
+    public boolean attackAllInRange(ArrayList<GameThread> zombies, GameThread character, int num, int cercano, JLabel refLabel) {
         ArrayList<CharacterGame> onRange = new ArrayList<CharacterGame>();
         for (GameThread zombie : zombies) {
             if (inRange(zombie, character, num, cercano)) {
@@ -32,10 +33,16 @@ public class Impact extends Weapon implements Serializable{
             }
         }
         if (onRange.size() != 0) {
+            String url = this.getcAppearance(this.getcLevel(),"ATTACK");
+            if (url != null) {
+                cambiarImagen(url, refLabel);
+            }
             character.guerrero.cAttack(onRange);
             //Si es un guerrero de impacto, es decir una bomba, se autodestruye
             character.guerrero.cDamage(character.guerrero.getcLife());
+            return true;
         }
+        return false;
     }
 
     @Override

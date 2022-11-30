@@ -148,6 +148,8 @@ public class asignarPosicion extends javax.swing.JFrame {
             int x = Integer.parseInt(txtFPosicionX.getText());
             int y = Integer.parseInt(txtFPosicionY.getText());
             CharacterGame selected = listaEscojida.get(cmbCharacterGame.getSelectedIndex());
+            System.out.println("COMBOBOX GET SELECTED INDEX: "+cmbCharacterGame.getSelectedIndex());
+            System.out.println("TYPO: "+selected.getTipo());
             selected.setPosition(x, y);
             JOptionPane.showMessageDialog(jPanel1,"Se ingreso correctamente la posicion para el personaje: " + selected.getcName() + " X: " + x +" Y: " + y 
                     ,"Datos ingresados",JOptionPane.WARNING_MESSAGE);

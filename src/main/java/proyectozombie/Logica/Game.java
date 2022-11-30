@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.CharacterCreation.PFCharacter;
+import proyectozombie.GameEnviroment.TypeCharacters;
 import proyectozombie.GameEnviroment.Weapons.Weapon;
 import proyectozombie.GameEnviroment.Zombies.*;
 import proyectozombie.Users.User;
@@ -27,7 +28,7 @@ public class Game {
     }
 
     public void generateEnemies(ArrayList<Zombie> zombies, User usuario) {
-        int cantidad = usuario.getCampos(); //5-3=2
+        int cantidad = usuario.getCampos()-3; //5-3=2
         ArrayList<Zombie> enemies = new ArrayList<>();
 
         for (int i = 0; i < zombies.size(); i++) {
@@ -39,9 +40,11 @@ public class Game {
         int i = 0;
         while (cantidad > 0) {
             if (i >= enemies.size()) i = 0;
-            listEnemies.add(PFCharacter.getPrototype(enemies.get(i).getcName(), 1).get(0));
-            int y = (int)(Math.random()*24+1);
-            String nombreArchivo = listEnemies.get(i).getcAppearance(1, "STOP");
+            Zombie pfZom = (Zombie)PFCharacter.getPrototype(enemies.get(i).getcName(), 1).get(0);
+            pfZom.initLog();
+            listEnemies.add( (CharacterGame) pfZom);
+            int y = (int)(Math.random()*5+1);
+            String nombreArchivo = listEnemies.get(i).getcAppearance(listEnemies.get(i).getcLevel(), "STOP");
             JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, 1, y);
             this.enemies.add(new GameThread(refPantalla, labelForThread, (i+1), listEnemies.get(i)));
             cantidad--;
@@ -52,7 +55,7 @@ public class Game {
     public void generateDefense(ArrayList<CharacterGame> listaEsco) {
         this.listDefense = listaEsco;
         for (int i = 0; i < listDefense.size(); i++) {
-            String nombreArchivo = listDefense.get(i).getcAppearance(1, "STOP");
+            String nombreArchivo = listDefense.get(i).getcAppearance(listDefense.get(i).getcLevel(), "STOP");
             int[] position = listDefense.get(i).getPosition();
             JLabel labelForThread = refPantalla.generateLabel(nombreArchivo, position[0], position[1]);
             this.defense.add(new GameThread(refPantalla, labelForThread, (i + 1), listDefense.get(i)));
@@ -128,7 +131,7 @@ public class Game {
     }
 
     //not sure TODO: review
-    public GameThread getEnemy(GameThread gameThread) {
+    public boolean getEnemy(GameThread gameThread) throws InterruptedException {
         int cercano = 800;
         int xGuerrero = gameThread.refLabel.getLocation().x;
         int yGuerrero = gameThread.refLabel.getLocation().y;
@@ -172,14 +175,21 @@ public class Game {
             ArrayList<GameThread> enemy = new ArrayList<>();
             for (int i = 0; i < enemies.size(); i++){
                 if (enemies.get(i).refLabel.getLocation().x == xEnemigo && enemies.get(i).refLabel.getLocation().y == yEnemigo ){
-                    if (enemies.get(i).guerrero.getcLife()> 0){
+                    if (enemies.get(i).guerrero.getcLife() > 0){
+                        System.out.println("Comprobar vida");
+                        System.out.println(enemies.get(i).guerrero.getcLife()+" "+enemies.get(i).guerrero.getcName());
                         enemy.add(enemies.get(i));
                     }
                 }
             }
             Weapon weapon = (Weapon) gameThread.guerrero;
-            weapon.attackAllInRange(enemy, gameThread, num, cercano);
-            return null;
+            Boolean ataco = weapon.attackAllInRange(enemy, gameThread, num, cercano, gameThread.refLabel);
+            gameThread.sleep(1000);
+            String url = gameThread.guerrero.getcAppearance3(gameThread.guerrero.getcLevel(),"STOP");
+            if (url != null) {
+                cambiarImagen(url, gameThread.refLabel);
+            }
+            return ataco;
         }
         
         else {
@@ -215,14 +225,19 @@ public class Game {
             ArrayList<GameThread> enemy = new ArrayList<>();
             for (int i = 0; i < defense.size(); i++){
                 if (defense.get(i).refLabel.getLocation().x == xEnemigo && defense.get(i).refLabel.getLocation().y == yEnemigo ){
-                    if (defense.get(i).guerrero.getcLife()> 0){
+                    if (defense.get(i).guerrero.getcLife() > 0){
                         enemy.add(defense.get(i));
                     }
                 }
             }    
             Zombie zombie = (Zombie) gameThread.guerrero;
-            zombie.attackAllInRange(enemy, gameThread);
-            return null;
+            Boolean ataco = zombie.attackAllInRange(enemy, gameThread, num, cercano, gameThread.refLabel);
+            gameThread.sleep(1000);
+            String url = gameThread.guerrero.getcAppearance3(gameThread.guerrero.getcLevel(),"STOP");
+            if (url != null) {
+                cambiarImagen(url, gameThread.refLabel);
+            }
+            return ataco;
         }
     }
 
@@ -241,7 +256,9 @@ public class Game {
         boolean esArmy = this.defense.contains(guerrero);
         if (esArmy) {
             for (int i = 0; i < this.defense.size(); i++) {
-                if (this.defense.get(i).guerrero.getcLife() > 0 && !(this.defense.get(i).guerrero.getcName().equalsIgnoreCase("Defensa")))
+                if (this.defense.get(i).guerrero.getcLife() < 0 && (this.defense.get(i).guerrero.getTipo() == TypeCharacters.RELIQUIA))
+                    ganador = "Enemigos";
+                else
                     return null;
             }
             ganador = "Enemigos";
@@ -249,7 +266,7 @@ public class Game {
 
         } else {
             for (int i = 0; i < enemies.size(); i++) {
-                if (enemies.get(i).guerrero.getcLife() > 0 && !(enemies.get(i).guerrero.getcName().equalsIgnoreCase("Defensa")))
+                if (enemies.get(i).guerrero.getcLife() > 0)
                     return null;
             }
             ganador = "Aliados";
@@ -265,6 +282,29 @@ public class Game {
         }
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).stopThread();
+        }
+    }
+    
+    private void cambiarImagen(String url, JLabel refLabel){
+        ImageIcon imageicon = new ImageIcon(url);
+        int ancho=imageicon.getIconWidth();
+        int alto=imageicon.getIconHeight();
+        Image img = imageicon.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+        refLabel.setIcon(new ImageIcon(img));
+        refLabel.setSize(ancho, alto);
+        refLabel.setOpaque(false);
+    }
+    
+    public void mostrarLog(){
+        for (GameThread gameThread : defense) {
+            Weapon weapon = (Weapon)gameThread.guerrero;
+            String log = weapon.getLog().readAllLog(weapon.getcLife());
+            gameThread.refPantalla.escribirHilos(log);
+        }
+        for (GameThread gameThread : enemies) {
+            Zombie zombie = (Zombie)gameThread.guerrero;
+            String log = zombie.getLog().readAllLog(zombie.getcLife());
+            gameThread.refPantalla.escribirHilos(log);
         }
     }
 }

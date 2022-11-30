@@ -18,7 +18,7 @@ import proyectozombie.interfaz.campoBatalla_Juego;
  * @author Jennifer
  */
 public class GameThread extends Thread implements Serializable{
-    private campoBatalla_Juego refPantalla;
+    protected campoBatalla_Juego refPantalla;
     public JLabel refLabel;
     int numero;
     private boolean running = true;
@@ -43,57 +43,62 @@ public class GameThread extends Thread implements Serializable{
 
      public void run(){
         
-        while(running){            
+        while(running){ 
+            Weapon weapon = null;
+            Zombie zombie = null;
             try {
                 if (this.guerrero.getcLife() > 0){
-                    Weapon weapon = null;
-                    Zombie zombie = null;
                     String url;
                     //Verificar el tipo y ver si camina o no
+                    boolean ataco = refPantalla.batalla.getEnemy(this);
                     switch (guerrero.getTipo()) {
-                        case BLOCKS: case CONTACTWEAPON: case IMPACT: case MEDIUMRANGE: case MULTIATTACK:
+                        case BLOCKS: case CONTACTWEAPON: case IMPACT: case MEDIUMRANGE: case MULTIATTACK: case RELIQUIA:
                             sleep(1000);
                             weapon = (Weapon) this.guerrero;
                             break;
                         case AERIALZOMBIE: case CONTACTZOMBIE: case HALFRANGEZOMBIE: case SMASHZOMBIE:
                             zombie = (Zombie)this.guerrero;
-                            url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
-                            if(url != null){
-                                cambiarImagen(url, refLabel);
-                            }
-                            sleep(1000);
-                            refPantalla.moveLabel(refLabel);
-                            url = guerrero.getcAppearance(guerrero.getcLevel(),"STOP");
-                            if(url != null){
-                                cambiarImagen(url, refLabel);
+                            if(!ataco){
+                                url = guerrero.getcAppearance3(guerrero.getcLevel(),"WALKING");
+                                if(url != null){
+                                    cambiarImagen(url, refLabel);
+                                }
+                                sleep(1000);
+                                refPantalla.moveLabel(refLabel);
+                                url = guerrero.getcAppearance3(guerrero.getcLevel(),"STOP");
+                                if(url != null){
+                                    cambiarImagen(url, refLabel);
+                                }
                             }
                             break;
                         case AERIAL: 
-                            weapon = (Weapon) this.guerrero;
+                            weapon = (Weapon) this.guerrero;                            
                         default:
-                            
-                            url = guerrero.getcAppearance(guerrero.getcLevel(),"WALKING");
-                            if(url != null){
-                                cambiarImagen(url, refLabel);
-                            }
-                            sleep(1000);
-                            refPantalla.moveLabel(refLabel);
-                            url = guerrero.getcAppearance(guerrero.getcLevel(),"STOP");
-                            if(url != null){
-                                cambiarImagen(url, refLabel);
+                            if(!ataco){
+                                url = guerrero.getcAppearance3(guerrero.getcLevel(),"WALKING");
+                                if(url != null){
+                                    cambiarImagen(url, refLabel);
+                                }
+                                sleep(1000);
+                                refPantalla.moveLabel(refLabel);
+                                url = guerrero.getcAppearance3(guerrero.getcLevel(),"STOP");
+                                if(url != null){
+                                    cambiarImagen(url, refLabel);
+                                }
                             }
                             break;
                     }
                     
-                    enemigo = refPantalla.batalla.getEnemy(this);
+                    
                     if(weapon != null){
                         String log = weapon.getLog().readLog();
-                        if(log != null){
+                        if(!"".equals(log)){
                             refPantalla.escribirHilos(log);
                         }
                     }else{
+                        System.out.println(guerrero.getTipo());
                         String log = zombie.getLog().readLog();
-                        if(log != null){
+                        if(!"".equals(log)){
                             refPantalla.escribirHilos(log);
                         }
                     }
@@ -101,16 +106,39 @@ public class GameThread extends Thread implements Serializable{
                 }else{
                     enemigo = refPantalla.batalla.getGanador(this);
                     
-                    String imagen= guerrero.getcAppearance(0, "LAPIDA");
+                    String imagen= guerrero.getcAppearance3(0, "LAPIDA");
                     if(imagen != null)
                         cambiarImagen(imagen, refLabel);
+                    this.stopThread();
                     
                 }
                 sleep(2000);
             } catch (InterruptedException ex) { }
 
-
+            boolean print = true;
             while(paused){
+                if(print){
+                    switch (guerrero.getTipo()) {
+                        case AERIAL:case BLOCKS: case CONTACTWEAPON: case IMPACT: case MEDIUMRANGE: case MULTIATTACK: case RELIQUIA:
+                            weapon = (Weapon) guerrero;
+                            break;
+                        default:
+                            zombie = (Zombie) guerrero;
+                    }
+                    if(weapon != null){
+                        String log = weapon.getLog().readLog();
+                        if(!"".equals(log)){
+                            refPantalla.escribirHilos(log);
+                        }
+                    }else{
+                        System.out.println(guerrero.getTipo());
+                        String log = zombie.getLog().readLog();
+                        if(!"".equals(log)){
+                            refPantalla.escribirHilos(log);
+                        }
+                    }
+                    print=false;
+                }
                 try {
                     sleep(100);
                 } catch (InterruptedException ex) {

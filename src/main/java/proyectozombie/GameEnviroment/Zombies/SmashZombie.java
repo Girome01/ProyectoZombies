@@ -8,7 +8,9 @@ import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.CharacterCreation.iPrototype;
 import proyectozombie.GameEnviroment.TypeCharacters;
 import proyectozombie.Logica.GameThread;
-import proyectozombie.Logica.ZombieThread;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import proyectozombie.GameEnviroment.TypeCharacters;
 
 public class SmashZombie extends Zombie implements Serializable{
 
@@ -18,10 +20,10 @@ public class SmashZombie extends Zombie implements Serializable{
     }
 
     @Override
-    public void attackAllInRange(ArrayList<GameThread> characters, GameThread zombie) {
+    public boolean attackAllInRange(ArrayList<GameThread> characters, GameThread zombie, int num, int cercano, JLabel refLabel) {
         ArrayList<CharacterGame> onRange = new ArrayList<>();
         for (GameThread character : characters) {
-            if (inRange(character, zombie)) {
+            if (inRange(character, zombie, num, cercano)) {
                 onRange.add(character.guerrero);
                 
                 String atacante = zombie.guerrero.getcName() +" "+ zombie.guerrero.getTipo() + " con daño "+
@@ -35,9 +37,15 @@ public class SmashZombie extends Zombie implements Serializable{
 
         }
         if (onRange.size() != 0) {
+            String url = this.getcAppearance(this.getcLevel(),"ATTACK");
+            if (url != null) {
+                cambiarImagen(url, refLabel);
+            }
             zombie.guerrero.cAttack(onRange);
             zombie.guerrero.cDamage(zombie.guerrero.getcLife());
+            return true;
         }
+        return false;
     }
     
     @Override

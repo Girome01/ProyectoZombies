@@ -18,5 +18,6 @@ public enum TypeCharacters {
     AERIALZOMBIE,
     CONTACTZOMBIE,
     HALFRANGEZOMBIE,
-    SMASHZOMBIE
+    SMASHZOMBIE,
+    RELIQUIA
 }

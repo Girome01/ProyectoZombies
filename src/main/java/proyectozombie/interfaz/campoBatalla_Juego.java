@@ -16,6 +16,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import proyectozombie.CharacterCreation.PFCharacter;
 import proyectozombie.GameEnviroment.Presets;
 import proyectozombie.Logica.*;
 
@@ -29,6 +30,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
     public Game batalla;
     public ArrayList<CharacterGame> listaPersonajesUsuario;
     protected User usuario;
+    PFCharacter characterFP = new PFCharacter();
     
     private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
     //private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
@@ -52,6 +54,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
             usuario.subirLevel();
         }
         
+        this.batalla.mostrarLog();
         /*this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -264,6 +267,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         if(valor!=null){
            preset = (Presets) FileManager.readObject(path+"\\ArchivosSerializados\\personajes.juego"); 
         }
+        preset.agregarPFCharacter(characterFP);
         batalla.generateDefense(usuario.getWarriors());
         batalla.generateEnemies(preset.getZombie(),usuario);
         batalla.startArmy();
@@ -285,21 +289,20 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
         
         usuario.subirLevel();
         
-        /*this.setVisible(false);
+        this.setVisible(false);
         escogerPersonajes_Juego frame = new escogerPersonajes_Juego(usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 150);
-        frame.setVisible(true);*/
+        frame.setVisible(true);
     }//GEN-LAST:event_btn_NextActionPerformed
 
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
         // TODO add your handling code here:
-        DateFormat dateFormat = new SimpleDateFormat("d-MMM-yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("d-MMM-yyyy HH.mm.ss");
         String date = dateFormat.format(new Date());
         System.out.println(date);
-        System.out.println(path+"\\ArchivosSerializados\\Partidas\\"+date+".juego");
-        //FileManager.writeObject(usuario, path+"\\ArchivosSerializados\\Partidas\\"+date+".juego");
+        FileManager.writeObject(usuario, path+"\\ArchivosSerializados\\Partidas\\"+date+".juego");
     }//GEN-LAST:event_btn_SaveActionPerformed
                         
     /**

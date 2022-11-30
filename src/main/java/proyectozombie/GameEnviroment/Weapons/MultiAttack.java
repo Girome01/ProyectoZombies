@@ -1,8 +1,11 @@
 package proyectozombie.GameEnviroment.Weapons;
 
+import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import proyectozombie.CharacterCreation.Appearance;
 import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.CharacterCreation.iPrototype;
@@ -18,7 +21,7 @@ public class MultiAttack extends Weapon implements Serializable{
     }
 
     @Override
-    public void attackAllInRange(ArrayList<GameThread> zombies, GameThread character, int num, int cercano) {
+    public boolean attackAllInRange(ArrayList<GameThread> zombies, GameThread character, int num, int cercano, JLabel refLabel) {
         ArrayList<CharacterGame> onRange = new ArrayList<CharacterGame>();
         for (GameThread zombie : zombies) {
             if (inRange(zombie, character, num, cercano)) {
@@ -34,8 +37,14 @@ public class MultiAttack extends Weapon implements Serializable{
         }
         //override realizado en Impact para autodestruccion
         if (onRange.size() != 0) {
+            String url = this.getcAppearance(this.getcLevel(),"ATTACK");
+            if (url != null) {
+                cambiarImagen(url, refLabel);
+            }
             character.guerrero.cAttack(onRange);
+            return true;
         }
+        return false;
     }
     @Override
     public iPrototype clone(){

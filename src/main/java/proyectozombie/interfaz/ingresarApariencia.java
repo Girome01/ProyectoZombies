@@ -273,7 +273,7 @@ public class ingresarApariencia extends javax.swing.JFrame {
                    CharacterGame personajeCopia = personajes.get(i);
                    Appearance nuevaApariencia = new Appearance();
                    nuevaApariencia.addAppearance(accionStr, path+"\\img\\"+imagenStr);
-                   personajes.get(i).setcAppearance( Integer.parseInt(nivel), nuevaApariencia);
+                   personajes.get(i).setcAppearance( Integer.parseInt(nivel), nuevaApariencia, accionStr);
                    //personajes.remove(i);
                    //personajes.add(personajeCopia);
                    

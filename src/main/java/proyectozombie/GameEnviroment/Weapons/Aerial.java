@@ -22,13 +22,14 @@ public class Aerial extends Weapon implements Serializable{
 
         int range = this.cShowGearList().get(0).getgRange();
 
-        int xZombie = zombie.refLabel.getLocation().x;
+        /*int xZombie = zombie.refLabel.getLocation().x;
         int yZombie = zombie.refLabel.getLocation().y;
 
         int xCharacter = character.refLabel.getLocation().x;
         int yCharacter = character.refLabel.getLocation().y;
 
-        return ((abs(xZombie - xCharacter) <= range) && (abs(yZombie - yCharacter) <= range));
+        return ((abs(xZombie - xCharacter) <= range) && (abs(yZombie - yCharacter) <= range));*/
+        return cercano/num <= range;
     }
     
     @Override
