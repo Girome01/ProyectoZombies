@@ -25,7 +25,6 @@ public class CharacterGame implements iPrototype, Serializable{
         this.cStorageSpace = builder.cStorageSpace;
         this.cCost = builder.cCost;
         this.cLevel = builder.cLevel;
-        this.position = new int[2];
     }
 
     public CharacterGame(String cName, HashMap<Integer, Appearance> cAppearance, 
@@ -38,6 +37,7 @@ public class CharacterGame implements iPrototype, Serializable{
         this.cStorageSpace = cStorageSpace;
         this.cCost = cCost;
         this.cLevel = cLevel;
+        this.position = new int[2];
     }
 
     public int[] getPosition() {

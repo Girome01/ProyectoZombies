@@ -28,7 +28,7 @@ public class asignarPosicion extends javax.swing.JFrame {
 
     private void generarComboBoxCharacters(){
         for(int i=0; i<this.listaEscojida.size(); i++){
-            cmbCharacterGame.addItem(this.listaEscojida.get(i).getcName());
+            cmbCharacterGame.addItem(this.listaEscojida.get(i).getcName()+" "+i);
         }
     }
     
@@ -56,7 +56,6 @@ public class asignarPosicion extends javax.swing.JFrame {
 
         cmbCharacterGame.setBackground(new java.awt.Color(0, 102, 102));
         cmbCharacterGame.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        cmbCharacterGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnAsigPos.setBackground(new java.awt.Color(0, 102, 102));
         btnAsigPos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -134,7 +133,8 @@ public class asignarPosicion extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        campoBatalla_Juego frame = new campoBatalla_Juego(listaEscojida,usuario);
+        System.out.println("Crea campoBatalla");
+        campoBatalla_Juego frame = new campoBatalla_Juego(listaEscojida, usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 150);
@@ -144,18 +144,27 @@ public class asignarPosicion extends javax.swing.JFrame {
 
     private void btnAsigPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsigPosActionPerformed
         // TODO add your handling code here:
-        int x = Integer.parseInt(txtFPosicionX.getText());
-        int y = Integer.parseInt(txtFPosicionY.getText());
-        CharacterGame selected = listaEscojida.get(cmbCharacterGame.getSelectedIndex());
-        selected.setPosition(x, y);
-        JOptionPane.showMessageDialog(jPanel1,"Se ingreso correctamente la posicion para el personaje: " + selected.getcName() + " X: " + x +" Y: " + y 
-                ,"Datos ingresados",JOptionPane.WARNING_MESSAGE);
+        if(!txtFPosicionX.getText().isBlank() && !txtFPosicionY.getText().isBlank()){
+            int x = Integer.parseInt(txtFPosicionX.getText());
+            int y = Integer.parseInt(txtFPosicionY.getText());
+            CharacterGame selected = listaEscojida.get(cmbCharacterGame.getSelectedIndex());
+            selected.setPosition(x, y);
+            JOptionPane.showMessageDialog(jPanel1,"Se ingreso correctamente la posicion para el personaje: " + selected.getcName() + " X: " + x +" Y: " + y 
+                    ,"Datos ingresados",JOptionPane.WARNING_MESSAGE);
+            limpiarInterfaz();
+        }else
+            JOptionPane.showMessageDialog(jPanel1,"Dejo en blanco la posicion X o la posicion Y" 
+                    ,"Datos ingresados",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_btnAsigPosActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
+    
+    private void limpiarInterfaz(){
+        txtFPosicionX.setText("");
+        txtFPosicionY.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsigPos;

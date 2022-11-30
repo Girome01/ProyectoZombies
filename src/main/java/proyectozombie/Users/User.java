@@ -17,6 +17,14 @@ public class User implements Serializable{
         this.campos = campos;
     }
 
+    public void setCampos(int campo){
+        this.campos = campo;
+    }
+    
+    public int getCampos(){
+        return this.campos;
+    }
+    
     public String getName() {
         return name;
     }
@@ -52,10 +60,11 @@ public class User implements Serializable{
     
     public boolean sumatoriaCampos(){
         int sumatoria=0;
-        for(int i=0;i<warriors.size();i++){
+        for(int i=0;i < warriors.size();i++){
                 sumatoria+=warriors.get(i).getcStorageSpace();
         }
-        if(this.campos>=sumatoria){
+        System.out.println("Sumatoria = "+sumatoria+" Campos = "+campos);
+        if(this.campos >= sumatoria){
             return true;     
         }
         return false;

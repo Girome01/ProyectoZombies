@@ -21,13 +21,13 @@ import proyectozombie.Users.User;
  * @author monic
  */
 public class escogerPartida_Juego extends javax.swing.JFrame {
-    User nuevo;
+    User usuario;
     ArrayList<CharacterGame> listaPersonajes;
     /**
      * Creates new form escogerPartida_Juego
      */
     public escogerPartida_Juego(User nuevo) {
-        this.nuevo=nuevo;
+        this.usuario=nuevo;
         initComponents();
     }
 
@@ -157,10 +157,10 @@ public class escogerPartida_Juego extends javax.swing.JFrame {
     private void btn_EscogidaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EscogidaPActionPerformed
         // TODO add your handling code here:
        String ruta = lbl_rutaA.getText();
-       nuevo = (User) FileManager.readObject(ruta);
-       listaPersonajes = nuevo.getWarriors();
+       usuario = (User) FileManager.readObject(ruta);
+       listaPersonajes = usuario.getWarriors();
        this.setVisible(false);
-       campoBatalla_Juego frame = new campoBatalla_Juego(listaPersonajes, nuevo);
+       campoBatalla_Juego frame = new campoBatalla_Juego(listaPersonajes, usuario);
        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
        frame.pack();
        frame.setLocation(290, 50);
@@ -171,7 +171,7 @@ public class escogerPartida_Juego extends javax.swing.JFrame {
     private void btn_NuevaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevaPActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        escogerPersonajes_Juego frame = new escogerPersonajes_Juego(nuevo);
+        escogerPersonajes_Juego frame = new escogerPersonajes_Juego(usuario);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocation(290, 150);
