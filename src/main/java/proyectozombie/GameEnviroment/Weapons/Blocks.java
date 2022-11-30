@@ -19,4 +19,6 @@ public class Blocks extends Weapon implements Serializable{
         character.setcGear(cGear);
         return character;
     }
+    
+    //TODO: Hacer override de attackallinrange para que bloque no haga nada??
 }

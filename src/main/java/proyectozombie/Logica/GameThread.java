@@ -87,9 +87,15 @@ public class GameThread extends Thread implements Serializable{
                     
                     enemigo = refPantalla.batalla.getEnemy(this);
                     if(weapon != null){
-                        refPantalla.escribirHilos(weapon.getLog().readLog());
+                        String log = weapon.getLog().readLog();
+                        if(log != null){
+                            refPantalla.escribirHilos(log);
+                        }
                     }else{
-                        refPantalla.escribirHilos(zombie.getLog().readLog());
+                        String log = zombie.getLog().readLog();
+                        if(log != null){
+                            refPantalla.escribirHilos(log);
+                        }
                     }
                     //refPantalla.escribirHilos("Soy "+this.guerrero.getcName()+" y lucho por mi bando con vida "+this.guerrero.getcLife()+" y ataque "+this.guerrero.getcHitPS());
                 }else{

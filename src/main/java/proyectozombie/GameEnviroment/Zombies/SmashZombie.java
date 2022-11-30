@@ -23,8 +23,14 @@ public class SmashZombie extends Zombie implements Serializable{
         for (GameThread character : characters) {
             if (inRange(character, zombie)) {
                 onRange.add(character.guerrero);
-                this.setLog(zombie.guerrero.getcName() + " ataco a " + character.guerrero.getcName() + " en X:" +
-                        zombie.refLabel.getLocation().x + " Y:" + zombie.refLabel.getLocation().y);
+                
+                String atacante = zombie.guerrero.getcName() +" "+ zombie.guerrero.getTipo() + " con daño "+
+                    zombie.guerrero.cShowGearList().get(0).getgDamage() + " en posicion x: " +
+                    zombie.refLabel.getLocation().x + " Y:" + zombie.refLabel.getLocation().y + " ataco a ";
+                String atacado = character.guerrero.getcName() + " " + character.guerrero.getTipo() + " con vida " + 
+                        character.guerrero.getcLife() + " en posicion x: " + character.refLabel.getLocation().x + 
+                        " y: " + character.refLabel.getLocation().y;
+                this.setLog(atacante + atacado);
             }
 
         }
