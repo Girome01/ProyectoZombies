@@ -8,7 +8,10 @@ import proyectozombie.CharacterCreation.CharacterGame;
 import proyectozombie.Users.User;
 import java.awt.Image;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,6 +31,7 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
     protected User usuario;
     
     private String path = "C:\\Users\\Usuario\\Desktop\\TEC\\VI_semestre\\Diseno_Software\\Proyecto_3\\git\\ProyectoZombies\\src\\main\\java\\proyectozombie";
+    //private String path = "C:\\Users\\anagu\\OneDrive\\Documentos\\TEC\\SemestreII2022\\DiseñoAlgoritmos\\ProyectoZombies\\src\\main\\java\\proyectozombie";
 
   
    public campoBatalla_Juego(ArrayList<CharacterGame> listaPersonajesUsuario, User usuario) {
@@ -287,6 +291,11 @@ public class campoBatalla_Juego extends javax.swing.JFrame implements Serializab
 
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
         // TODO add your handling code here:
+        DateFormat dateFormat = new SimpleDateFormat("d/MMM/yyyy HH:mm:ss");
+        String date = dateFormat.format(new Date());
+        System.out.println(date);
+        System.out.println(path+"\\ArchivosSerializados\\Partidas\\"+date+".juego");
+        //FileManager.writeObject(usuario, path+"\\ArchivosSerializados\\Partidas\\"+date+".juego");
     }//GEN-LAST:event_btn_SaveActionPerformed
                         
     /**
